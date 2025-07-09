@@ -1,6 +1,6 @@
 # Site settings
 title: 廖浩龙 Blog
-SEOTitle: 廖浩龙的博客 | Hux Blog
+SEOTitle: 廖浩龙的博客 | An_Night Blog
 header-img: img/home-bg.jpg
 email: aliaohaolong@qq.com
 description: "这里是 @廖浩龙 的个人博客"
@@ -13,7 +13,7 @@ future: true
 
 # SNS settings
 RSS: false
-#weibo_username: -
+weibo_username: 愤怒的章鱼o
 #zhihu_username: -
 github_username: ALiaoHaolong
 #twitter_username: -
