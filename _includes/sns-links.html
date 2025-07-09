@@ -12,8 +12,18 @@
   <li>
     <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
       <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if site.bilibili_uid %}
+  <li>
+    <a href="https://space.bilibili.com/{{ site.bilibili_uid }}">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-bilibili fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>
@@ -22,8 +32,8 @@
   <li>
     <a href="https://twitter.com/{{ site.twitter_username }}">
       <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>
@@ -32,8 +42,8 @@
   <li>
     <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
       <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-stack-1x fa-inverse">知</i>
       </span>
     </a>
   </li>
@@ -52,8 +62,8 @@
   <li>
     <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
       <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>
@@ -72,8 +82,8 @@
   <li>
     <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
       <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>

@@ -13,7 +13,8 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username: 愤怒的章鱼o
+bilibili_uid: 200696877
+#weibo_username: -
 #zhihu_username: -
 github_username: ALiaoHaolong
 #twitter_username: -
