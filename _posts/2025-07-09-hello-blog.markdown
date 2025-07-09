@@ -1,11 +1,11 @@
 ---
 layout:     post
-title:      " \"Hello World, Hello Blog\" "
+title:      "Hello World, Hello Blog"
 date:       2025-07-09 19:23:00
 author:     "廖浩龙"
 header-img: "img/in-post/post-bg-hello-blog.jpg"
 tags:
-    - 日常
+    - 日常
 ---
 
 新坑前排合影quq
