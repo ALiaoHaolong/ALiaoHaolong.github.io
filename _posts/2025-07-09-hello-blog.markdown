@@ -1,11 +1,10 @@
 ---
-layout: post
-title: "Hello Blog! 新的起点还是数字坟墓？"
-subtitle: "站在这个崭新的博客起点，我不禁思考：这究竟是一个充满可能性的新开始，还是又一座将被遗忘的数字坟墓？"
-date: 2025-07-09 19:23:00
-author: "廖浩龙"
+layout:     post
+title:      "Hello Blog! 新的起点还是数字坟墓？"
+subtitle:   "站在这个崭新的博客起点，我不禁思考：这究竟是一个充满可能性的新开始，还是又一座将被遗忘的数字坟墓？"
+date:       2025-07-09 19:23:00
+author:     "廖浩龙"
 header-img: "img/in-post/post-bg-hello-blog.jpg"
-header-mask: 0.3
 tags:
     - 日常
 ---
