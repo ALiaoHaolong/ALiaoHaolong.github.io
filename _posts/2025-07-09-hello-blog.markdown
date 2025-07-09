@@ -1,7 +1,6 @@
 ---
 layout:     post
-title:      "Hello Blog! 新的起点还是数字坟墓？"
-subtitle:   "站在这个崭新的博客起点，我不禁思考：这究竟是一个充满可能性的新开始，还是又一座将被遗忘的数字坟墓？"
+title:      " \"Hello World, Hello Blog\" "
 date:       2025-07-09 19:23:00
 author:     "廖浩龙"
 header-img: "img/in-post/post-bg-hello-blog.jpg"
@@ -9,10 +8,11 @@ tags:
     - 日常
 ---
 
-
 新坑前排合影quq
 
 ## 关于那些"可能会..."
+
+站在这个崭新的博客起点，我不禁思考：这究竟是一个充满可能性的新开始，还是又一座将被遗忘的数字坟墓？
 
 ### 1. 个人主页化
 
