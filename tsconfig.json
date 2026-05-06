@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true, // 修复 config.mts 中的导入错误
+    "moduleResolution": "bundler", // 修复 teekConfig.mts 中的导入错误
+  }
+}

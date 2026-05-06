@@ -1,0 +1,31 @@
+/* 通过覆盖 articleBanner 的 filter 和 opacity 设置，禁用了高斯模糊和叠加层 */
+
+.tk-article-banner__cover {
+    filter: none;
+    opacity: 1;
+}
+.tk-article-banner__cover img {
+    opacity: 1;
+}
+
+.VPMenuGroup .title {
+    color: var(--vp-c-text-3);
+}
+
+/* 带 Banner 的文章页增加了背景图作者组件。当该组件显示时，调整原末行的底部空白高度 */
+
+.tk-article-banner__info:has(.tk-article-cover-img-author) .tk-article-analyze {
+    margin-bottom: 10px;
+}
+
+/* 主页博主信息卡片，增加高度 */
+
+.tk-my__avatar {
+    margin-top: 200px;
+}
+
+/* 禁用博主个人卡片背景上的遮罩 */
+
+.tk-my__avatar__circle--bg.is-mask:after {
+    background: none;
+}

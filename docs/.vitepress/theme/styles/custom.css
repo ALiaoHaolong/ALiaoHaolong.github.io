@@ -1,0 +1,25 @@
+/* articleBanner 文字颜色 */
+
+.article-banner-light-text {
+    --tk-article-banner-text-color: #FFF;
+}
+
+.article-banner-dark-text {
+    --tk-article-banner-text-color: #000;
+}
+
+.article-banner-light-text-with-shadow {
+    --tk-article-banner-text-color: #FFF;
+}
+
+.article-banner-light-text-with-shadow .tk-article-banner__info {
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+.article-banner-dark-text-with-shadow {
+    --tk-article-banner-text-color: #000;
+}
+
+.article-banner-dark-text-with-shadow .tk-article-banner__info {
+    text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
+}
