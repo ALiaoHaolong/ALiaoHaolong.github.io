@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { TkArticleShare, TkVpContainer } from "vitepress-theme-teek";
-import { useData } from "vitepress";
+import { useData, useRoute } from "vitepress";
 import { computed } from "vue";
 import type { VpContainerProps } from "vitepress-theme-teek/lib/components/common/VpContainer/src/vpContainer"
 
@@ -19,10 +19,15 @@ const author = computed(() =>
 ) // ?? 是空值合并运算符，只有当左侧是 null 或 undefined 时，才返回右侧的值
 
 // 生成 VpContainer 需要的参数
+const route = useRoute();
 const bottomTipBeforeConfig = computed<VpContainerProps>(() => {
   // 链接
-  const { origin, pathname } = window.location; // 从 URL 中解析域名和路径
-  const url = `${origin}${frontmatter.value.permalink ?? pathname}`;
+  let url = frontmatter.value.permalink || route.path;
+  // 延迟获取当前域名，否则会导致编译时 SSR 错误
+  if (typeof window !== 'undefined') {
+    const { origin } = window.location;
+    url = `${origin}${url}`;
+  }
 
   return {
     type: "tip",
