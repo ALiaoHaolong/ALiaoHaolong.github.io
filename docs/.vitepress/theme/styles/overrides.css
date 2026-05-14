@@ -29,3 +29,9 @@
 .tk-my__avatar__circle--bg.is-mask:after {
     background: none;
 }
+
+/* 减小原文章 Banner 图的缩放动画比例 */
+
+.tk-article-banner__cover {
+    transform: scale(1.05);
+}
