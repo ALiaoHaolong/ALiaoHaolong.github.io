@@ -6,6 +6,7 @@ import { teekConfig } from './teekConfig.mts'
 // VitePress 基础配置 https://vitepress.dev/zh/
 const vitePressOptions: UserConfig = {
   title: "白羽拾光 🕊️",
+  titleTemplate: ":title - 白羽拾光 🕊️",
   description: "拾起光阴落下的羽毛。",
   head: [
     [ 'link', { rel: 'icon', href: '/favicon.ico' } ]
