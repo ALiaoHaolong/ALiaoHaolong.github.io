@@ -1,5 +1,9 @@
 <template>
   <Teek.Layout>
+    <template #teek-notice-content>
+      公告内容，暂未启用
+    </template>
+
     <template #teek-home-banner-content-after>
       <HomeBannerContentAfter />
     </template>
