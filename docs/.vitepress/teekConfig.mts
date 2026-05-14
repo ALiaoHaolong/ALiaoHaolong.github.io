@@ -376,8 +376,8 @@ export const teekConfig = defineTeekConfig({
     enabled: true, // 是否启用单文章页 Banner
     showCategory: true, // 是否展示分类
     showTag: true, // 是否展示标签
-    defaultCoverImg: "/homepage/bg1.png", // 默认封面图
-    defaultCoverBgColor: "gray", // 默认封面背景色，优先级低于 defaultCoverImg
+    // defaultCoverImg: "", // 默认封面图
+    defaultCoverBgColor: "#4169E1", // 默认封面背景色，优先级低于 defaultCoverImg
   },
   // 文章信息配置
   articleAnalyze: {

@@ -22,6 +22,9 @@ const { frontmatter } = useData();
 // cover 图来源
 const coverImgInfo = computed(() => {
   const coverImg = frontmatter.value.coverImg; // /articles/ぴっぴ_55647411.jpg
+  // 兼容纯色背景
+  if (coverImg === undefined)
+    return undefined;
   const fileName = coverImg.split("/").pop(); // ぴっぴ_55647411.jpg
   const nameWithoutExt = fileName.replace(/\.[^.]+$/, ""); // ぴっぴ_55647411
   const parts = nameWithoutExt.split("_");
