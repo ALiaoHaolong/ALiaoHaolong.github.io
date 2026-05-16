@@ -20,7 +20,7 @@ import "vitepress-theme-teek/tk-plus/banner-desc-gradient.scss"; // 博客风格
 import "vitepress-theme-teek/tk-plus/fade-up-animation.scss"; // 首次加载的动画渐入效果
 import "vitepress-theme-teek/tk-plus/home-card-hover.scss"; // 首页卡片悬停效果
 
-import "./styles/overrides.css"
+import "./styles/override.css"
 import "./styles/custom.css"
 import TeekLayoutProvider from "./components/TeekLayoutProvider.vue";
 
