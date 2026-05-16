@@ -12,7 +12,7 @@ tags:
 titleTag: 原创
 sidebar: false
 description: 从无法复刻的成功到标准开发架构——Minecraft 模组工程化实践记录。
-coverImg: /articles/Aio_129854627.jpg
+coverImg: /articles/啊层层层_141930909.jpg
 
 aside: false
 pageClass: article-banner-light-text-with-shadow
