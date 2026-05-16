@@ -64,7 +64,7 @@ export const useRibbon = (options: UseRibbonOptions = {}) => {
     // 创建 canvas
     canvas = document.createElement("canvas");
     canvas.id = "ribbon";
-    canvas.style.cssText = `position:fixed;top:0;left:0;z-index:${zIndex}`;
+    canvas.style.cssText = `opacity:0.6;position:fixed;top:0;left:0;z-index:${zIndex}`;
     document.body.append(canvas);
 
     const dpr = window.devicePixelRatio || 1;
