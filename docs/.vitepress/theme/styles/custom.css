@@ -1,4 +1,10 @@
-/* articleBanner 文字颜色 */
+/*
+ articleBanner 文字颜色
+
+ 1. 在启用 articleBanner 的文章页中，使用以下样式可为 articleBanner 部分的文字调整颜色、增加阴影
+ 2. 无法组合使用
+ 3. 在 md 文件的 frontmatter 中使用 pageClass 参数指定样式名
+ */
 
 .article-banner-light-text {
     --tk-article-banner-text-color: #FFF;

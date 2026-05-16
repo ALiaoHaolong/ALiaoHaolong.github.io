@@ -8,6 +8,8 @@
     opacity: 1;
 }
 
+/* 调整导航栏菜单组中，分组标题的字体颜色 */
+
 .VPMenuGroup .title {
     color: var(--vp-c-text-3);
 }
