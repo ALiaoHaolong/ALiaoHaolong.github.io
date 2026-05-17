@@ -319,17 +319,17 @@ export const teekConfig = defineTeekConfig({
       // 图片
       `<img alt="Cats" src="/homepage/cats.png" style="height: 100px;">`,
       // 徽章
-      `<div class="flx-wrap-justify-center" style="margin-top: 6px;margin-bottom: 6px;">
-        <a title="GitHub last commit" target="_blank" href="https://github.com/ALiaoHaolong/ALiaoHaolong.github.io" style="margin-right: 10px;">
+      `<div class="flx-wrap-justify-center" style="margin-top: 6px;margin-bottom: 6px;gap: 4px 10px;">
+        <a title="GitHub last commit" target="_blank" href="https://github.com/ALiaoHaolong/ALiaoHaolong.github.io">
           <img src="https://img.shields.io/github/last-commit/ALiaoHaolong/ALiaoHaolong.github.io?color=lightseagreen&label=commit&logo=github" alt="GitHub last commit">
         </a>
-        <a title="VitePress" target="_blank" href="https://vitepress.dev/" style="margin-right: 10px;">
+        <a title="VitePress" target="_blank" href="https://vitepress.dev/">
           <img src="https://img.shields.io/badge/vitepress-v1.6.4-mediumpurple?logo=vitepress" alt="VitePress">
         </a>
-        <a title="Teek" target="_blank" href="https://vp.teek.top/" style="margin-right: 10px;">
+        <a title="Teek" target="_blank" href="https://vp.teek.top/">
           <img src="https://img.shields.io/badge/teek-v1.5.7-cornflowerblue" alt="Teek">
         </a>
-        <a title="VitePress I18n" target="_blank" href="https://vitepress-i18n.cdget.com/" style="margin-right: 10px;">
+        <a title="VitePress I18n" target="_blank" href="https://vitepress-i18n.cdget.com/">
           <img src="https://img.shields.io/badge/vitepress--i18n-v1.3.5-palevioletred" alt="VitePress I18n">
         </a>
         <a title="License" target="_blank" href="https://github.com/ALiaoHaolong/ALiaoHaolong.github.io/blob/master/LICENSE">
