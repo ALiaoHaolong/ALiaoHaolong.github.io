@@ -40,6 +40,9 @@ const vitePressOptions: UserConfig = {
     },
   },
   lastUpdated: true, // 显示最后更新时间（基于 /git log 的时间）
+  markdown: {
+    lineNumbers: true, // 启用行号
+  },
   extends: teekConfig,
 }
 
