@@ -319,7 +319,7 @@ export const teekConfig = defineTeekConfig({
       // 图片
       `<img alt="Cats" src="/homepage/cats.png" style="height: 100px;">`,
       // 徽章
-      `<div class="flx-wrap-justify-center" style="margin-top: 6px;margin-bottom: 6px;gap: 4px 10px;">
+      `<span style="display: flex;flex-wrap: wrap;justify-content: center;margin-top: 6px;margin-bottom: 6px;gap: 4px 10px;">
         <a title="GitHub last commit" target="_blank" href="https://github.com/ALiaoHaolong/ALiaoHaolong.github.io">
           <img src="https://img.shields.io/github/last-commit/ALiaoHaolong/ALiaoHaolong.github.io?color=lightseagreen&label=commit&logo=github" alt="GitHub last commit">
         </a>
@@ -335,7 +335,7 @@ export const teekConfig = defineTeekConfig({
         <a title="License" target="_blank" href="https://github.com/ALiaoHaolong/ALiaoHaolong.github.io/blob/master/LICENSE">
           <img src="https://img.shields.io/badge/license-Apache_2.0-green" alt="License">
         </a>
-      </div>`,
+      </span>`,
     ],
     // 页脚信息，支持 HTML 格式（位于主题版权下方）
     // bottomMessage: ["上面的内容和图标都可以修改（本条内容也可以隐藏的）"],
