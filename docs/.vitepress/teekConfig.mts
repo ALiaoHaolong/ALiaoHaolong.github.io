@@ -294,23 +294,24 @@ export const teekConfig = defineTeekConfig({
     { icon: "simple-icons:bilibili", name: "Bilibili", link: "https://space.bilibili.com/200696877", },
   ],
   // 页脚信息组配置
-  /* footerGroup: [
+  footerGroup: [
     {
-      title: "外部链接",
+      title: "官网",
       links: [
-        { name: "示例 1", link: "https://vp.teek.top", icon: "icon-github" },
-        { name: "示例 2", link: "https://vp.teek.top" },
-        { name: "示例 3", link: "https://vp.teek.top" },
+        { name: "VitePress", link: "https://vitepress.dev/zh/" },
+        { name: "Teek", link: "https://vp.teek.top/" },
       ],
     },
     {
       title: "内部链接",
       links: [
-        { name: "快速开始", link: "/guide/quickstart" },
-        { name: "配置简介", link: "/reference/config" },
+        { name: "分类", link: "/categories" },
+        { name: "标签", link: "/tags" },
+        { name: "归档", link: "/archives" },
+        { name: "文章清单", link: "/articleOverview" },
       ],
     },
-  ], */
+  ],
   // 页脚配置
   footerInfo: {
     // 页脚信息，支持 HTML 格式（位于主题版权上方）
@@ -418,16 +419,8 @@ export const teekConfig = defineTeekConfig({
     enabled: false,
   },
   // 赞赏功能配置
+  // 已使用赞赏页替代此功能，无需配置
   // appreciation: {
-  //   position: "doc-after", // 赞赏位置
-  //   // 赞赏配置
-  //   options: {
-  //     icon: "weChatPay", // 赞赏图标，内置 weChatPay 和 alipay
-  //     expandTitle: "打赏支持", // 展开标题，支持 HTML
-  //     collapseTitle: "下次一定", // 折叠标题，支持 HTML
-  //     content: `<img src='/tea/wechat-sponsor.png' alt="">`, // 赞赏内容，支持 HTML
-  //     expand: false, // 是否默认展开，默认 false
-  //   },
   // },
   // 面包屑配置
   breadcrumb: {

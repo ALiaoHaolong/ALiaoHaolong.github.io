@@ -43,3 +43,9 @@
 .container.share-card-container .share-card__item__img {
     border-radius: 16%;
 }
+
+/* 首页内容与页脚分割线 */
+
+.VPContent.is-home {
+    border-bottom: rgba(128 128 128 / 25%) solid 1px;
+}

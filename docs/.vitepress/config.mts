@@ -22,8 +22,8 @@ const vitePressOptions: UserConfig = {
       {
         text: '统计',
         items: [
-          { text: '全部分类', link: '/categories.html' },
-          { text: '全部标签', link: '/tags.html' },
+          { text: '分类', link: '/categories.html' },
+          { text: '标签', link: '/tags.html' },
           { text: '归档', link: '/archives.html' },
           { text: '文章清单', link: '/articleOverview.html' },
         ]
