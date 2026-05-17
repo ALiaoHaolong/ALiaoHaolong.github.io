@@ -10,6 +10,7 @@ tags:
   - 架构设计
   - 工程化
 titleTag: 原创
+top: true
 sidebar: false
 description: 从无法复刻的成功到标准开发架构——Minecraft 模组工程化实践记录。
 coverImg: /articles/啊层层层_141930909.jpg
