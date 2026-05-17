@@ -36,7 +36,7 @@ import NotFound from "./NotFound.vue";
 const { theme, frontmatter } = useData();
 
 // 彩带背景
-const { start: startRibbon, stop: stopRibbon } = useRibbon({ immediate: false, clickReRender: true });
+const { start: startRibbon, stop: stopRibbon } = useRibbon({ alpha: 0.4, immediate: false, clickReRender: true });
 // 页脚运行时间
 const { start: startRuntime, stop: stopRuntime } = useRuntime(theme.value.docAnalysis.createTime, {
   prefix: `<span style="width: 16px; display: inline-block; vertical-align: -3px; margin-right: 3px;">${clockIcon}</span>小破站已运行 `,
