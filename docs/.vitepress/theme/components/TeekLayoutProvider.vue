@@ -36,30 +36,29 @@ import NotFound from "./NotFound.vue";
 const { theme, frontmatter } = useData();
 
 // 彩带背景
-const { start: startRibbon, stop: stopRibbon } = useRibbon({ alpha: 0.4, immediate: false, clickReRender: true });
-// 页脚运行时间
-const { start: startRuntime, stop: stopRuntime } = useRuntime(theme.value.docAnalysis.createTime, {
-  prefix: `<span style="width: 16px; display: inline-block; vertical-align: -3px; margin-right: 3px;">${clockIcon}</span>小破站已运行 `,
-});
-
-const watchRuntimeAndRibbon = async (layout: string) => {
+const { start: startRibbon, stop: stopRibbon } = useRibbon({ alpha: 0.4, immediate: false, clickReRender: true, });
+const watchRibbon = async (layout: string) => {
   const isHome = layout === "home";
   const isDoc = [undefined, "doc"].includes(layout);
-
-  // 博客类风格的首页显示运行时间
   await nextTick();
-  if (isHome) startRuntime();
-  else stopRuntime();
-
   // 博客类风格的首页显示彩带 & 文章页显示彩带
   if (isHome || isDoc) startRibbon();
   else stopRibbon();
 };
+watch(frontmatter, newVal => setTimeout(() => watchRibbon(newVal.layout), 700), { immediate: true, flush: "post", });
 
-watch(frontmatter, newVal => setTimeout(() => watchRuntimeAndRibbon(newVal.layout), 700), {
-  immediate: true,
-  flush: "post",
+// 页脚运行时间
+const { start: startRuntime, stop: stopRuntime } = useRuntime(theme.value.docAnalysis.createTime, {
+  prefix: `<span style="width: 16px; display: inline-block; vertical-align: -3px; margin-right: 3px;">${clockIcon}</span>小破站已运行 `,
 });
+const watchRuntime = async (layout: string) => {
+  const isHome = layout === "home";
+  await nextTick();
+  // 博客类风格的首页显示运行时间
+  if (isHome) startRuntime();
+  else stopRuntime();
+};
+watch(frontmatter, newVal => setTimeout(() => watchRuntime(newVal.layout), 700), { immediate: true, flush: "post", });
 </script>
 
 <style scoped lang="scss">
