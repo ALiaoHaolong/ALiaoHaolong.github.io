@@ -37,3 +37,9 @@
 .tk-article-banner__cover {
     transform: scale(1.05);
 }
+
+/* 减小文章页内分享卡片头像的圆角比值 */
+
+.container.share-card-container .share-card__item__img {
+    border-radius: 16%;
+}
