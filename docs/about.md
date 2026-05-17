@@ -25,56 +25,56 @@ outline: deep
 
 - name: Minecraft
   desc: 建筑、模组、命令...啥都玩！
-  avatar: /public/about/minecraft.png
+  avatar: /about/Minecraft.png
   link: https://www.minecraft.net/zh-hans
   bgColor: '#3C8527BF'
   textColor: '#FFF'
 
 - name: 英雄联盟
   desc: 辅助/ADC都行，拒绝中单！
-  avatar: /public/about/League of Legends.png
+  avatar: /about/League of Legends.png
   link: https://lol.qq.com/
   bgColor: '#B06731BF'
   textColor: '#FFF'
   
 - name: Counter-Strike 2
   desc: 黄金 C+ 前来报道！
-  avatar: /public/about/Counter-Strike 2.png
+  avatar: /about/Counter-Strike 2.png
   link: http://counter-strike.net/
   bgColor: '#28397FBF'
   textColor: '#FFF'
 
 - name: 三角洲行动
   desc: 真·大坝·菜鸟
-  avatar: /public/about/Delta Force.png
+  avatar: /about/Delta Force.png
   link: https://df.qq.com/
   bgColor: '#088A54BF'
   textColor: '#FFF'
 
 - name: 深岩银河
   desc: Rock and Roll!
-  avatar: /public/about/Deep Rock Galactic.png
+  avatar: /about/Deep Rock Galactic.png
   link: http://deeprockgalactic.com
   bgColor: '#3E6C47BF'
   textColor: '#FFF'
 
 - name: 双影奇境
   desc: 童话一般的故事 :)
-  avatar: /public/about/Split Fiction.png
+  avatar: /about/Split Fiction.png
   link: https://www.ea.com/games/split-fiction/split-fiction
   bgColor: '#5F2B7ABF'
   textColor: '#FFF'
 
 - name: 深海迷航
   desc: 深海恐惧症慎入...
-  avatar: /public/about/Subnautica.png
+  avatar: /about/Subnautica.png
   link: https://unknownworlds.com/en/news?game=subnautica
   bgColor: '#015DC1BF'
   textColor: '#FFF'
 
 - name: 深海迷航 2
   desc: 基地建设体验 Max！
-  avatar: /public/about/Subnautica 2.png
+  avatar: /about/Subnautica 2.png
   link: https://subnautica.com/zh-cn
   bgColor: '#0877A6BF'
   textColor: '#FFF'
