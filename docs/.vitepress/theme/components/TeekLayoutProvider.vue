@@ -1,21 +1,31 @@
 <template>
   <Teek.Layout>
+    <!-- 公告内容，暂未启用 -->
     <template #teek-notice-content>
-      公告内容，暂未启用
+
     </template>
 
+    <!-- 首页 Banner 背景图作者及来源标注 -->
     <template #teek-home-banner-content-after>
       <HomeBannerContentAfter />
     </template>
 
+    <!-- 首页个人卡片背景图来源标注 -->
+    <template #teek-home-card-my-avatar-before>
+      <HomeCardMyAvatarBefore />
+    </template>
+
+    <!-- 博客风文章页 Banner 背景图作者及来源标注 -->
     <template #teek-article-banner-info-bottom>
       <ArticleBannerInfoBottom />
     </template>
 
+    <!-- 文章底部版权信息标注 -->
     <template #teek-article-bottom-tip-before>
       <ArticleBottomTipBefore/>
     </template>
 
+    <!-- 自定义 404 内容 -->
     <template #not-found>
       <NotFound/>
     </template>
@@ -29,6 +39,7 @@ import { nextTick, watch } from "vue";
 import { useRibbon } from "../composables/useRibbon";
 import { useRuntime } from "../composables/useRuntime";
 import HomeBannerContentAfter from "./HomeBannerContentAfter.vue";
+import HomeCardMyAvatarBefore from "./HomeCardMyAvatarBefore.vue";
 import ArticleBannerInfoBottom from "./ArticleBannerInfoBottom.vue";
 import ArticleBottomTipBefore from "./ArticleBottomTipBefore.vue";
 import NotFound from "./NotFound.vue";
