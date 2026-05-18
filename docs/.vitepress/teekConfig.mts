@@ -3,6 +3,9 @@ import { defineTeekConfig } from "vitepress-theme-teek/config";
 
 // Teek 完整配置：
 // https://github.com/Kele-Bingtang/vitepress-theme-teek/blob/main/packages/config/types.ts
+
+// 使用 // 进行注释的配置，是已经配置好的，请勿修改
+// 使用 /* */ 进行注释的配置，是尚未配置的
 export const teekConfig = defineTeekConfig({
   // 是否启用 Teek 主题，如果为 false，则不会主题的 99% 功能，只保留永久链接、锚点滚动、深色、浅色模式过渡动画这三个功能
   teekTheme: true,
@@ -25,7 +28,7 @@ export const teekConfig = defineTeekConfig({
   // 设置当前主题尺寸（只影响 Teek 主题首页和功能页，不影响 VitePress 默认主题）
   themeSize: 'default',
   // 页面加载 Loading 动画，如果为 boolean，则控制是否启用，如果为字符串，则指定加载 Loading 动画的文案
-  loading: "努力加载中",
+  loading: false,
   // 深色、浅色模式切换时的过渡动画配置
   viewTransition: {
     enabled: true, // 是否启用深浅色切换动画效果
@@ -36,13 +39,13 @@ export const teekConfig = defineTeekConfig({
   // 回到顶部按钮配置
   backTop: {
     enabled: true, // 是否启动回到顶部功能
-    content: "progress", // 回到顶部按钮的显示内容，可选配置 progress | icon
-    done: TkMessage => TkMessage.success("返回顶部成功"), // 回到顶部后的回调
+    content: "icon", // 回到顶部按钮的显示内容，可选配置 progress | icon
+    // done: TkMessage => TkMessage.success("返回顶部成功"), // 回到顶部后的回调
   },
   // 滚动到评论区配置
   toComment: {
-    enabled: true, // 是否启动滚动到评论区功能
-    done: TkMessage => TkMessage.success("滚动到评论区成功"), // 滚动到评论区后的回调
+    enabled: false, // 是否启动滚动到评论区功能
+    // done: TkMessage => TkMessage.success("滚动到评论区成功"), // 滚动到评论区后的回调
   },
   // 文章页顶部使用 VitePress 容器添加提示
   articleTopTip: (frontmatter) => {
@@ -84,34 +87,42 @@ export const teekConfig = defineTeekConfig({
   }, */
   // 主题增强配置，当开启后，右上角将有主题增强面板出现。
   themeEnhance: {
-    enabled: false, // 是否启用主题增强功能
-    // position: "top", // 位置，top 为导航栏右侧，bottom 为右下角
-    // // 布局切换配置
-    // layoutSwitch: {
-    //   disabled: true, // 禁用布局切换
-    //   defaultMode: "original", // 布局切换的默认模式
-    //   disableHelp: false, // 禁用帮助提示
-    //   disableAnimation: false, // 禁用布局切换动画
-    //   defaultDocMaxWidth: 90, // 内容布局最大宽度的默认百分比，仅限 0-100
-    //   disableDocMaxWidthHelp: false, // 禁用帮助提示
-    //   defaultPageMaxWidth: 95, // 页面布局最大宽度的默认百分比，仅限 0-100
-    //   disablePageMaxWidthHelp: false, // 禁用帮助提示
-    // },
-    // // 布局主题色配置
-    // themeColor: {
-    //   disabled: true, // 禁用布局主题色切换
-    //   defaultColorName: "vp-green", // 布局默认主题色
-    //   defaultSpread: false, // 是否将主题色扩散到其他元素（根据主题色计算其他元素需要的颜色）
-    //   disableHelp: true, // 禁用帮助提示
-    //   disabledInMobile: false, // 是否在移动端禁用
-    // },
-    // // 聚光灯配置
-    // spotlight: {
-    //   disabled: false, // 禁用聚光灯
-    //   defaultStyle: "aside", //  聚光灯默认样式
-    //   disableHelp: false, // 禁用帮助提示
-    //   defaultValue: true, // 聚光灯默认开关状态
-    // },
+    enabled: true, // 是否启用主题增强功能
+    hidden: true, // 是否隐藏主题增强面板
+    position: "top", // 位置，top 为导航栏右侧，bottom 为右下角
+    // 布局切换配置
+    layoutSwitch: {
+      disabled: false, // 禁用布局切换
+      hidden: false, // 是否隐藏布局切换面板
+      defaultMode: "original", // 布局切换的默认模式
+      switchModeDone: () => {}, // 布局切换完成后的回调
+      disableHelp: false, // 禁用帮助提示
+      disableAnimation: false, // 禁用布局切换动画
+      defaultDocMaxWidth: 90, // 内容布局最大宽度的默认百分比，仅限 0-100
+      disableDocMaxWidthHelp: false, // 禁用帮助提示
+      defaultPageMaxWidth: 95, // 页面布局最大宽度的默认百分比，仅限 0-100
+      disablePageMaxWidthHelp: false, // 禁用帮助提示
+    },
+    // 布局主题色配置
+    themeColor: {
+      disabled: false, // 禁用布局主题色切换
+      hidden: false, // 是否隐藏布局主题色切换面板
+      customize: false, // 是否从 0 完全自定义布局主题色，不使用内置主题色
+      defaultColorName: "vp-success", // 布局默认主题色
+      switchColorDone: () => {}, // 主题色切换完成后的回调
+      defaultSpread: false, // 是否将主题色扩散到其他元素（根据主题色计算其他元素需要的颜色）
+      disableHelp: true, // 禁用帮助提示
+      disabledInMobile: false, // 是否在移动端禁用
+      append: [], // 自定义主题色，将会追加到内置主题色后面
+    },
+    // 聚光灯配置
+    spotlight: {
+      disabled: false, // 禁用聚光灯
+      hidden: false, // 是否隐藏聚光灯面板
+      defaultStyle: "aside", // 聚光灯默认样式
+      disableHelp: false, // 禁用帮助提示
+      defaultValue: true, // 聚光灯默认开关状态
+    },
   },
   // 文章默认的作者信息 (在文章介绍卡片下展示) (在 articleBottomTip 中硬编码了作者名称)
   author: {
@@ -150,9 +161,9 @@ export const teekConfig = defineTeekConfig({
   },
   // 壁纸模式，在首页 最顶部 进入全屏后开启，仅当 banner.bgStyle = 'fullImg' 或 bodyBgImg.imgSrc 存在才生效。
   wallpaper: {
-    enabled: true, // 是否启用壁纸模式
-    hideBanner: false, // 开启壁纸模式后，是否隐藏 Banner
-    hideMask: false, // 开启壁纸模式后，是否隐藏 Banner 或 bodyBgImage 的遮罩层，则确保 banner.mask 和 bodyBgImage.mask 为 true 才生效
+    enabled: false, // 是否启用壁纸模式
+    // hideBanner: false, // 开启壁纸模式后，是否隐藏 Banner
+    // hideMask: false, // 开启壁纸模式后，是否隐藏 Banner 或 bodyBgImage 的遮罩层，则确保 banner.mask 和 bodyBgImage.mask 为 true 才生效
   },
   // 文章列表配置
   post: {
@@ -305,10 +316,10 @@ export const teekConfig = defineTeekConfig({
     {
       title: "内部链接",
       links: [
-        { name: "分类", link: "/categories" },
-        { name: "标签", link: "/tags" },
-        { name: "归档", link: "/archives" },
-        { name: "文章清单", link: "/articleOverview" },
+        { name: "分类", link: "/categories.html" },
+        { name: "标签", link: "/tags.html" },
+        { name: "归档", link: "/archives.html" },
+        { name: "文章清单", link: "/articleOverview.html" },
       ],
     },
   ],
@@ -364,14 +375,14 @@ export const teekConfig = defineTeekConfig({
     customHtml: `<span id="runtime"></span>`,
   },
   // 新版代码块配置
-  /* codeBlock: {
+  codeBlock: {
     enabled: true, // 是否启用新版代码块
-    collapseHeight: 10, // 超出高度后自动折叠，设置 true 则默认折叠，false 则默认不折叠
-    overlay: false, // 代码块底部是否显示展开/折叠遮罩层
+    collapseHeight: false, // 超出高度 (px) 后自动折叠，设置 true 则默认折叠，false 则默认不折叠
+    overlay: false, // 代码块底部是否显示展开/折叠遮罩层（启用后，原本的全部折叠将替换为显示 overlayHeight 高度的内容，并在底部增加渐变遮罩，显示：查看更多）
     overlayHeight: 400, // 当出现遮罩层时，指定代码块显示高度，当 overlay 为 true 时生效
-    langTextTransform: "uppercase", // 语言文本显示样式，为 text-transform 的值:none, capitalize, lowercase, uppercase
-    copiedDone: TkMessage => TkMessage.success("复制成功！"), // 复制代码完成后的回调
-  }, */
+    langTextTransform: "lowercase", // 语言文本显示样式，为 text-transform 的值:none, capitalize, lowercase, uppercase
+    // copiedDone: TkMessage => TkMessage.success("复制成功！"), // 复制代码完成后的回调
+  },
   // 文章页顶部 Banner，仅在没有侧边栏的文章页生效
   articleBanner: {
     enabled: true, // 是否启用单文章页 Banner
@@ -418,8 +429,7 @@ export const teekConfig = defineTeekConfig({
   riskLink: {
     enabled: false,
   },
-  // 赞赏功能配置
-  // 已使用赞赏页替代此功能，无需配置
+  // 赞赏功能配置，已使用赞赏页替代此功能
   // appreciation: {
   // },
   // 面包屑配置
@@ -434,61 +444,59 @@ export const teekConfig = defineTeekConfig({
     enabled: false, // 是否启用公告功能
   },
   // 评论配置
-  /* comment: {
+  comment: {
     provider: "giscus", // 评论区提供者
-    // 评论区配置项，根据 provider 不同而不同，具体看对应官网的使用介绍
     options: {
-      // twikoo 配置，官网：https://twikoo.js.org/
-      // envId: "your envId",
-
-      // waline 配置，官网：https://waline.js.org/
-      // serverURL: "your serverURL",
-      // jsLink: "https://unpkg.com/@waline/client@v3/dist/waline.js",
-      // cssLink: "https://unpkg.com/@waline/client@v3/dist/waline.css",
-
       // giscus 配置，官网：https://giscus.app/zh-CN
-      repo: "your name/your repo",
-      repoId: "your repoId",
-      category: "your category",
-      categoryId: "your categoryId",
-
-      // artalk 配置，官网：https://artalk.js.org/
-      // server: "your server",
-      // site: "site",
+      repo: "ALiaoHaolong/ALiaoHaolong.github.io",
+      repoId: "R_kgDOSP76Fw",
+      category: "Announcements",
+      categoryId: "DIC_kwDOSP76F84C9Smp",
+      mapping: "pathname",
+      strict: "0",
+      reactionsEnabled: "1",
+      emitMetadata: "0",
+      inputPosition: "top",
+      lang: "zh-CN",
+      theme: "preferred_color_scheme",
+      loading: "lazy", // 评论懒加载
+      // useOnline: true, // 是否使用在线链接，使用默认值
+      // link: 'https://giscus.app/client.js', // giscus.js 在线链接，useOnline 为 true 时生效，使用默认值
+      // integrity: undefined, // giscus.js 的 integrity，未知，不配
     },
-  }, */
-  // 内置 Vite 插件配置
-  /* vitePlugins: {
-    sidebar: true, // 是否启用 sidebar 插件
-    sidebarOption: {}, // sidebar 插件配置项
-    permalink: true, // 是否启用 permalink 插件
-    permalinkOption: {}, // permalinks 插件配置项
-    mdH1: true, // 是否启用 mdH1 插件
-    catalogueOption: {}, // catalogues 插件配置项
-    docAnalysis: true, // 是否启用 docAnalysis 插件
-    docAnalysisOption: {}, // docAnalysis 插件配置项
-    fileContentLoaderIgnore: [], // fileContentLoader 插件扫描 markdown 文档时，指定忽略路径，格式为 glob 表达式，如 **!/test/!**
-    autoFrontmatter: true, // 是否启用 autoFrontmatter 插件
-    // autoFrontmatter 插件配置项
-    autoFrontmatterOption: {
-      permalink: true, // 是否开启生成永久链接
-      recoverTransform: false, // 是否开启同名 key 覆盖
-      categories: true, // 是否开启自动生成 categories
-      coverImg: false, // 是否开启添加文档封面图
-      forceCoverImg: false, // 是否开启强制覆盖封面图
-      coverImgList: [], // 封面图列表
-      // 处理永久链接的规则
-      permalinkRules: [
-        //{ folderName: "01.指南/01.简介/", prefix: "/$path/$uuid", removeLevel: 99 }, // 添加前缀
-      ],
-    },
-  }, */
-  // Markdown 插件配置
+  },
+  // 内置 Vite 插件配置，全部使用默认值
+  // vitePlugins: {
+  //   sidebar: true, // 是否启用 sidebar 插件
+  //   sidebarOption: {}, // sidebar 插件配置项
+  //   permalink: true, // 是否启用 permalink 插件
+  //   permalinkOption: {}, // permalinks 插件配置项
+  //   mdH1: true, // 是否启用 mdH1 插件
+  //   catalogueOption: {}, // catalogues 插件配置项
+  //   docAnalysis: true, // 是否启用 docAnalysis 插件
+  //   docAnalysisOption: {}, // docAnalysis 插件配置项
+  //   fileContentLoaderIgnore: [], // fileContentLoader 插件扫描 markdown 文档时，指定忽略路径，格式为 glob 表达式，如 **/test/**
+  //   autoFrontmatter: true, // 是否启用 autoFrontmatter 插件
+  //   // autoFrontmatter 插件配置项
+  //   autoFrontmatterOption: {
+  //     permalink: true, // 是否开启生成永久链接
+  //     recoverTransform: false, // 是否开启同名 key 覆盖
+  //     categories: true, // 是否开启自动生成 categories
+  //     coverImg: false, // 是否开启添加文档封面图
+  //     forceCoverImg: false, // 是否开启强制覆盖封面图
+  //     coverImgList: [], // 封面图列表
+  //     // 处理永久链接的规则
+  //     permalinkRules: [
+  //       //{ folderName: "01.指南/01.简介/", prefix: "/$path/$uuid", removeLevel: 99 }, // 添加前缀
+  //     ],
+  //   },
+  // },
+  // Markdown 插件配置，疑似需要写在 config.mts 中才会生效，请移步 config.mts 查看
   // markdown: {},
-  // 站点分析配置
-  /* siteAnalytics: [
-    { provider: "google", options: { id: "******" } },
-    { provider: "baidu", options: { id: "******" } },
-    { provider: "umami", options: { id: "******", src: "**" } },
-  ], */
+  // 站点分析配置，更详细的用户行为统计，需要去对应的第三方服务商申请/配置/查看统计结果，暂不配置
+  // siteAnalytics: [
+  //   { provider: "google", options: { id: "******" } },
+  //   { provider: "baidu", options: { id: "******" } },
+  //   { provider: "umami", options: { id: "******", src: "**" } },
+  // ],
 });

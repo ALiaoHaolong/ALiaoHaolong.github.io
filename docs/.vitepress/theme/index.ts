@@ -1,4 +1,4 @@
-import Teek from "vitepress-theme-teek";
+import Teek, { giscusContext } from "vitepress-theme-teek";
 
 // 主题增强
 import "vitepress-theme-teek/index.css";
@@ -20,6 +20,10 @@ import "vitepress-theme-teek/tk-plus/banner-desc-gradient.scss"; // 博客风格
 import "vitepress-theme-teek/tk-plus/fade-up-animation.scss"; // 首次加载的动画渐入效果
 import "vitepress-theme-teek/tk-plus/home-card-hover.scss"; // 首页卡片悬停效果
 
+// 评论
+import { provide } from "vue";
+import Giscus from "@giscus/vue";
+
 import "./styles/override.css"
 import "./styles/custom.css"
 import TeekLayoutProvider from "./components/TeekLayoutProvider.vue";
@@ -29,5 +33,7 @@ export default {
   extends: Teek,
   Layout: TeekLayoutProvider,
   setup: () => {
+    // 注入评论区实例
+    provide(giscusContext, () => Giscus);
   },
 };
