@@ -3,9 +3,6 @@ import { defineTeekConfig } from "vitepress-theme-teek/config";
 
 // Teek 完整配置：
 // https://github.com/Kele-Bingtang/vitepress-theme-teek/blob/main/packages/config/types.ts
-
-// 使用 // 进行注释的配置，是已经配置好的，请勿修改
-// 使用 /* */ 进行注释的配置，是尚未配置的
 export const teekConfig = defineTeekConfig({
   // 是否启用 Teek 主题，如果为 false，则不会主题的 99% 功能，只保留永久链接、锚点滚动、深色、浅色模式过渡动画这三个功能
   teekTheme: true,
@@ -75,16 +72,16 @@ export const teekConfig = defineTeekConfig({
   windowTransition: true,
   // 站点特性列表，在文档风格的首页展渲染
   // features: [],
-  // body 背景图片配置 (全图模式基础配置，由于全图模式下，首页的分页组件、页尾徽章待优化显示效果，且博客风页与文档风页需要强行启用主题增强，暂不使用)
-  /* bodyBgImg: {
-    imgSrc: ["/homepage/bg1.png", "/homepage/bg2.png"], // body 背景图片链接。单张图片 string | 多张图片 string[], 多张图片时每隔 imgInterval 秒换一张
-    imgOpacity: 1, // body 背景图透明度，选值 0.1 ~ 1.0
-    imgInterval: 15000, //  body 当多张背景图时（imgSrc 为数组），设置切换时间，单位：毫秒
-    imgShuffle: false, // body 背景图是否随机切换，为 false 时按顺序切换
-    mask: false, // body 背景图遮罩
-    maskBg: "rgba(0, 0, 0, 0.2)", // body 背景图遮罩颜色，如果为数字，则是 rgba(0, 0, 0, ${maskBg})，如果为字符串，则作为背景色。mask 为 true 时生效
-    bannerStyle: "full", // Banner 风格，part 为局部 Banner，显示 feature；full 为全屏 Banner，不显示 feature
-  }, */
+  // body 背景图片配置 (全图模式基础配置，由于全图模式下，首页的分页组件、页脚信息组、页脚徽章待优化显示效果，且博客风页与文档风页需要强行启用主题增强，暂不使用)
+  // bodyBgImg: {
+  //   imgSrc: ["/homepage/mmAir_124883229.jpg"], // body 背景图片链接。单张图片 string | 多张图片 string[], 多张图片时每隔 imgInterval 秒换一张
+  //   imgOpacity: 1, // body 背景图透明度，选值 0.1 ~ 1.0
+  //   imgInterval: 15000, //  body 当多张背景图时（imgSrc 为数组），设置切换时间，单位：毫秒
+  //   imgShuffle: false, // body 背景图是否随机切换，为 false 时按顺序切换
+  //   mask: false, // body 背景图遮罩
+  //   maskBg: "rgba(0, 0, 0, 0.2)", // body 背景图遮罩颜色，如果为数字，则是 rgba(0, 0, 0, ${maskBg})，如果为字符串，则作为背景色。mask 为 true 时生效
+  //   bannerStyle: "full", // Banner 风格，part 为局部 Banner，显示 feature；full 为全屏 Banner，不显示 feature
+  // },
   // 主题增强配置，当开启后，右上角将有主题增强面板出现。
   themeEnhance: {
     enabled: true, // 是否启用主题增强功能
