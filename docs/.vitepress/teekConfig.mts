@@ -369,6 +369,7 @@ export const teekConfig = defineTeekConfig({
     //   name: "",
     //   link: "",
     // },
+    // 自定义 HTML 片段
     customHtml: `<span id="runtime"></span>`,
   },
   // 新版代码块配置
