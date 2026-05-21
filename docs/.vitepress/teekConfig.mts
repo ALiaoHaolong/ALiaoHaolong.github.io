@@ -41,7 +41,7 @@ export const teekConfig = defineTeekConfig({
   },
   // 滚动到评论区配置
   toComment: {
-    enabled: false, // 是否启动滚动到评论区功能
+    enabled: true, // 是否启动滚动到评论区功能
     // done: TkMessage => TkMessage.success("滚动到评论区成功"), // 滚动到评论区后的回调
   },
   // 文章页顶部使用 VitePress 容器添加提示
