@@ -1,3 +1,5 @@
+import { isClient } from "vitepress-theme-teek";
+
 interface UseDocBgLayerOptions {
   /**
    * 自定义样式
@@ -7,6 +9,8 @@ interface UseDocBgLayerOptions {
 
 // 创建图片层
 const createDocBgLayer = (styles: Partial<CSSStyleDeclaration>) => {
+  if (!isClient) return;
+
   const docBgLayer = document.createElement('img');
   Object.assign(docBgLayer.style, styles);
   docBgLayer.dataset.src = '';
@@ -41,6 +45,8 @@ export const useDocBgImage = (options: UseDocBgLayerOptions = {}) => {
 
   // 切换图片
   const switchDocBgImage = (nextSrc: string) => {
+    if (!isClient) return;
+
     // 获取新旧层
     const oldBgLayer = activeDocBgLayer === 0 ? docBgLayer0 : docBgLayer1;
     const newBgLayer = activeDocBgLayer === 0 ? docBgLayer1 : docBgLayer0;
