@@ -313,10 +313,10 @@ export const teekConfig = defineTeekConfig({
     {
       title: "内部链接",
       links: [
-        { name: "分类", link: "/categories.html" },
-        { name: "标签", link: "/tags.html" },
-        { name: "归档", link: "/archives.html" },
-        { name: "文章清单", link: "/articleOverview.html" },
+        { name: "分类", link: "/@pages/categoriesPage.html" },
+        { name: "标签", link: "/@pages/tagsPage.html" },
+        { name: "归档", link: "/@pages/archivesPage.html" },
+        { name: "文章清单", link: "/@pages/articleOverviewPage.html" },
       ],
     },
   ],
