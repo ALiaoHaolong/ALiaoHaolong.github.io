@@ -25,6 +25,11 @@
       <ArticleBottomTipBefore/>
     </template>
 
+    <!-- 归档页贡献图 -->
+    <template #teek-archives-top-before>
+      <ContributeChart />
+    </template>
+
     <!-- 自定义 404 内容 -->
     <template #not-found>
       <NotFound/>
@@ -38,12 +43,13 @@ import { useData } from "vitepress";
 import { nextTick, watch } from "vue";
 import { useRibbon } from "../composables/useRibbon";
 import { useRuntime } from "../composables/useRuntime";
+import { useDocBgImage } from "../composables/useDocBgImage.ts";
 import HomeBannerContentAfter from "./HomeBannerContentAfter.vue";
 import HomeCardMyAvatarBefore from "./HomeCardMyAvatarBefore.vue";
 import ArticleBannerInfoBottom from "./ArticleBannerInfoBottom.vue";
 import ArticleBottomTipBefore from "./ArticleBottomTipBefore.vue";
+import ContributeChart from "./ContributeChart.vue";
 import NotFound from "./NotFound.vue";
-import { useDocBgImage } from "../composables/useDocBgImage.ts";
 
 const { theme, frontmatter } = useData();
 
