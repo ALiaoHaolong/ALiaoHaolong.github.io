@@ -89,11 +89,11 @@ const calendarRange = computed((): string[] => {
   const today = formatDate(date, "yyyy-MM-dd");
   // 根据屏幕宽度动态计算起始日期
   if (screenWidth.value < screenWidthThresholdMax) // 屏幕宽度小于最大阈值时，文章页宽度等于屏幕宽度
-    date.setTime(date.getTime() - (7 * 7 - 1) * oneDay); // 最少显示 7 列
+    date.setTime(date.getTime() - (6 * 7 + date.getDay()) * oneDay); // 基础 6 列 + 当前星期数动态一列
   if (screenWidth.value > screenWidthThresholdMin && screenWidth.value < screenWidthThresholdMax) // 大于起始计算阈值后，屏幕每宽一个 cell 的宽度，就增加一列
     date.setTime(date.getTime() - Math.ceil((screenWidth.value - screenWidthThresholdMin) / 20) * 7 * oneDay);
   if (screenWidth.value >= screenWidthThresholdMax) // 屏幕宽度大于最大阈值时，文章页宽度固定，使用静态值
-    date.setTime(date.getTime() - (37 * 7 - 1) * oneDay); // 固定显示 37 列
+    date.setTime(date.getTime() - (36 * 7 + date.getDay()) * oneDay); // 基础 36 列 + 当前星期数动态一列
   // 返回日期范围
   return [formatDate(date, "yyyy-MM-dd"), today];
 });
