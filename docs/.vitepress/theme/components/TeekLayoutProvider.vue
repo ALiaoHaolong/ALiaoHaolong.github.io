@@ -28,7 +28,7 @@
 
     <!-- 归档页贡献图 -->
     <template #teek-archives-top-before>
-      <ContributeHeatmapChart />
+      <ArchivesTopBefore />
     </template>
 
     <!-- 自定义 404 内容 -->
@@ -47,9 +47,10 @@ import { useRuntime } from "../composables/useRuntime";
 import { useDocBgImage } from "../composables/useDocBgImage.ts";
 import HomeBannerContentAfter from "./HomeBannerContentAfter.vue";
 import HomeCardMyAvatarBefore from "./HomeCardMyAvatarBefore.vue";
+import HomeCardTagAfter from "./HomeCardTagAfter.vue";
 import ArticleBannerInfoBottom from "./ArticleBannerInfoBottom.vue";
 import ArticleBottomTipBefore from "./ArticleBottomTipBefore.vue";
-import ContributeHeatmapChart from "./ContributeHeatmapChart.vue";
+import ArchivesTopBefore from "./ArchivesTopBefore.vue";
 import NotFound from "./NotFound.vue";
 
 const { theme, frontmatter } = useData();

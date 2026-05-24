@@ -1,13 +1,38 @@
 <template>
-  <div class="contribute__chart">
-    <div class="chart__box" ref="chartRef"></div>
+  <div :style="{ width: '100%', height: props.height + 'px' }">
+    <div :style="{ margin: 'auto', width: '100%', height: '100%' }" ref="chartRef"></div>
   </div>
 </template>
+
+<script lang="ts">
+export interface ContributeHeatmapChartOptions {
+  /**
+   * 组件高度
+   */
+  height: number,
+  /**
+   * ECharts 配置 - calender.top
+   */
+  calenderTop?: string | number,
+  /**
+   * ECharts 配置 - calender.left
+   */
+  calenderLeft?: string | number,
+  /**
+   * ECharts 配置 - calender.monthLabel.position
+   */
+  calenderMonthLabelPosition?: string,
+  /**
+   * 范围动态计算回调函数
+   */
+  calendarRange: (screenWidth: number) => string[],
+}
+</script>
 
 <script setup lang="ts">
 import { ref, watch, nextTick, computed, useTemplateRef, onMounted, onUnmounted } from "vue";
 import { useData } from "vitepress";
-import { formatDate, usePosts, useIntersectionObserver } from "vitepress-theme-teek";
+import { usePosts, useIntersectionObserver } from "vitepress-theme-teek";
 import * as echarts from "echarts/core"; // 引入 ECharts
 import { CanvasRenderer } from 'echarts/renderers'; // 引入 Canvas 渲染器
 import { HeatmapChart } from "echarts/charts"; // 热力图
@@ -21,6 +46,14 @@ echarts.use([
   HeatmapChart,
   CanvasRenderer,
 ]);
+
+// 接收参数
+const props = withDefaults(defineProps<ContributeHeatmapChartOptions>(), {
+  // 使用官方默认值
+  calenderTop: 60,
+  calenderLeft: 80,
+  calenderMonthLabelPosition: "start",
+});
 
 // 获取当前主题模式
 const { isDark } = useData();
@@ -76,26 +109,9 @@ const { create } = useIntersectionObserver(
 // 屏幕宽度
 const screenWidth = ref();
 
-// 动态日期计算的屏幕宽度阈值
-const oneDay = 24 * 60 * 60 * 1000;
-const screenWidthThresholdMin = 345;
-const screenWidthThresholdMax = 1280;
-
 // 根据屏幕宽度动态计算日期范围
 const calendarRange = computed((): string[] => {
-  // 获取当前时间
-  const date = new Date();
-  // 计算今天
-  const today = formatDate(date, "yyyy-MM-dd");
-  // 根据屏幕宽度动态计算起始日期
-  if (screenWidth.value < screenWidthThresholdMax) // 屏幕宽度小于最大阈值时，文章页宽度等于屏幕宽度
-    date.setTime(date.getTime() - (6 * 7 + date.getDay()) * oneDay); // 基础 6 列 + 当前星期数动态一列
-  if (screenWidth.value > screenWidthThresholdMin && screenWidth.value < screenWidthThresholdMax) // 大于起始计算阈值后，屏幕每宽一个 cell 的宽度，就增加一列
-    date.setTime(date.getTime() - Math.ceil((screenWidth.value - screenWidthThresholdMin) / 20) * 7 * oneDay);
-  if (screenWidth.value >= screenWidthThresholdMax) // 屏幕宽度大于最大阈值时，文章页宽度固定，使用静态值
-    date.setTime(date.getTime() - (36 * 7 + date.getDay()) * oneDay); // 基础 36 列 + 当前星期数动态一列
-  // 返回日期范围
-  return [formatDate(date, "yyyy-MM-dd"), today];
+  return props.calendarRange(screenWidth.value);
 });
 
 // ECharts 配置项
@@ -119,7 +135,8 @@ const option = {
     },
   },
   calendar: {
-    left: "center",
+    top: props.calenderTop,
+    left: props.calenderLeft,
     itemStyle: {
       color: "#ebedf0", // 小方块背景色
       borderWidth: 5,
@@ -133,14 +150,18 @@ const option = {
       firstDay: 7,
       nameMap: "ZH",
       color: "#67676c", // --vp-c-text-2
+      silent: true, // 不响应鼠标事件
     },
     monthLabel: {
+      position: props.calenderMonthLabelPosition,
       color: "#67676c", // --vp-c-text-2
+      silent: true, // 不响应鼠标事件
     },
     yearLabel: {
       show: true,
       position: "right",
       color: "#929295", // --vp-c-text-3
+      silent: true, // 不响应鼠标事件
     },
     silent: {
       show: false,
@@ -206,17 +227,6 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
-/*noinspection CssUnusedSymbol*/
-.tk-archives .contribute__chart {
-  width: 100%;
-  height: 260px;
-}
+<style scoped lang="scss">
 
-/*noinspection CssUnusedSymbol*/
-.tk-archives .contribute__chart .chart__box {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-}
 </style>
