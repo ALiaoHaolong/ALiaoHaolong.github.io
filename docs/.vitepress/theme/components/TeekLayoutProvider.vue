@@ -1,3 +1,4 @@
+<!--suppress VueUnrecognizedSlot -->
 <template>
   <Teek.Layout>
     <!-- 公告内容，暂未启用 -->
@@ -27,7 +28,7 @@
 
     <!-- 归档页贡献图 -->
     <template #teek-archives-top-before>
-      <ContributeChart />
+      <ContributeHeatmapChart />
     </template>
 
     <!-- 自定义 404 内容 -->
@@ -48,7 +49,7 @@ import HomeBannerContentAfter from "./HomeBannerContentAfter.vue";
 import HomeCardMyAvatarBefore from "./HomeCardMyAvatarBefore.vue";
 import ArticleBannerInfoBottom from "./ArticleBannerInfoBottom.vue";
 import ArticleBottomTipBefore from "./ArticleBottomTipBefore.vue";
-import ContributeChart from "./ContributeChart.vue";
+import ContributeHeatmapChart from "./ContributeHeatmapChart.vue";
 import NotFound from "./NotFound.vue";
 
 const { theme, frontmatter } = useData();
