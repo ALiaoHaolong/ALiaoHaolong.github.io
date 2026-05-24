@@ -101,9 +101,13 @@ const calendarRange = computed((): string[] => {
 // ECharts 配置项
 const option = {
   tooltip: {
-    extraCssText: "padding: 6px 10px;",
     formatter: function (params: any) {
       return `${params.value[0]} <br/> ${params.value[1]} 篇文章`;
+    },
+    backgroundColor: "#fff", // 同文档背景色
+    padding: [6, 10],
+    textStyle: {
+      color: "#3c3c43", // --vp-c-text-1
     },
   },
   visualMap: {
@@ -117,9 +121,9 @@ const option = {
   calendar: {
     left: "center",
     itemStyle: {
-      color: "#ebedf0",
+      color: "#ebedf0", // 小方块背景色
       borderWidth: 5,
-      borderColor: "#fff",
+      borderColor: "#fff", // 小方块分割色（同文档背景色）
       shadowBlur: 0,
     },
     cellSize: [20, 20],
@@ -128,15 +132,15 @@ const option = {
     dayLabel: {
       firstDay: 7,
       nameMap: "ZH",
-      color: "#67676c",
+      color: "#67676c", // --vp-c-text-2
     },
     monthLabel: {
-      color: "#67676c",
+      color: "#67676c", // --vp-c-text-2
     },
     yearLabel: {
       show: true,
       position: "right",
-      color: "#67676c",
+      color: "#929295", // --vp-c-text-3
     },
     silent: {
       show: false,
@@ -152,6 +156,8 @@ const option = {
 // 渲染贡献图
 const renderChart = (data: any) => {
   // 适配暗色模式
+  option.tooltip.backgroundColor = isDark.value ? "#1b1b1f;" : "#fff;"; // 同 borderColor
+  option.tooltip.textStyle.color = isDark.value ? "#dfdfd6" : "#3c3c43"; // --vp-c-text-1
   option.calendar.itemStyle.borderColor = isDark.value ? "#1b1b1f" : "#fff"; // 保留 Teek 设置
   option.calendar.itemStyle.color = isDark.value ? "#303035" : "#ebedf0"; // 原 Teek 的暗色模式过亮，调暗
   option.calendar.dayLabel.color = isDark.value ? "#98989f" : "#67676c"; // --vp-c-text-2
