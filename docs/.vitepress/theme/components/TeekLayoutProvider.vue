@@ -16,6 +16,11 @@
       <HomeCardMyAvatarBefore />
     </template>
 
+    <!-- 首页标签卡片后的贡献卡片 -->
+    <template #teek-home-card-tag-after>
+      <HomeCardTagAfter />
+    </template>
+
     <!-- 博客风文章页 Banner 背景图作者及来源标注 -->
     <template #teek-article-banner-info-bottom>
       <ArticleBannerInfoBottom />
