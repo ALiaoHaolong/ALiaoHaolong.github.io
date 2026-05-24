@@ -49,3 +49,40 @@
 .VPContent.is-home {
     border-bottom: rgba(128 128 128 / 25%) solid 1px;
 }
+
+/*
+在 .tk-article-page 样式上，宽度默认为 100%，然后它有两个媒体查询动作：
+
+@media (min-width: 1280px) {
+  width: getCssVar(page-width); // 执行时该值为 900
+}
+- 小于 1280 时，宽度为默认 100%
+- 大于等于 1280 时生效，宽度 900
+
+@media (max-width: 1280px) {
+  padding: 0 10px;
+}
+- 大于 1280 时不生效，padding 为默认 0
+- 小于等于 1280 时生效，padding 0 10px
+
+组合起来后：
+- 小于 1280 时，宽度 100%，padding 0 10px
+- 等于 1280 时，宽度 900，padding 0 10px
+- 大于 1280 时，宽度 900，padding 0
+可以看到，在屏幕宽度等于 1280 时，多了一个中间状态的出现。该问题至少影响归档页和文章清单页，而在归档页中，该问题影响到了贡献热力图的渲染。
+
+修复思路可以是，尝试覆写 padding 的生效逻辑，改为：
+- 小于 1280 时，padding 0 10px
+- 大于等于 1280 时，padding 0
+从而与 width 逻辑统一。
+*/
+
+@media (min-width: 1280px) {
+    .tk-article-page {
+        padding: 0 10px;
+    }
+}
+
+.tk-article-page {
+    padding: 0;
+}
