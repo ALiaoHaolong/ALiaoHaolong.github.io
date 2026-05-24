@@ -8,18 +8,17 @@
 import { ref, watch, nextTick, computed, useTemplateRef, onMounted, onUnmounted } from "vue";
 import { useData } from "vitepress";
 import { formatDate, usePosts, useIntersectionObserver } from "vitepress-theme-teek";
-import * as echarts from "echarts/core";
+import * as echarts from "echarts/core"; // 引入 ECharts
 import { CanvasRenderer } from 'echarts/renderers'; // 引入 Canvas 渲染器
-import { LabelLayout, UniversalTransition } from 'echarts/features'; // 标签自动布局、全局过渡动画等特性（控制有颜色的小方块显示）
-import { TooltipComponent, CalendarComponent, VisualMapComponent } from 'echarts/components';
+import { HeatmapChart } from "echarts/charts"; // 热力图
+import { TooltipComponent, CalendarComponent, VisualMapComponent } from 'echarts/components'; // 组件
 
 // 注册 ECharts 组件
 echarts.use([
   TooltipComponent,
   CalendarComponent,
   VisualMapComponent,
-  LabelLayout,
-  UniversalTransition,
+  HeatmapChart,
   CanvasRenderer,
 ]);
 
