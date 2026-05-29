@@ -18,7 +18,7 @@ interface UseDocBgLayerOptions {
 // 创建图片层
 const createDocBgLayer = (styles: Partial<CSSStyleDeclaration>): HTMLImageElement => {
   // 规避编译时 SSR 错误
-  if (!isClient) return;
+  if (!isClient) return {} as HTMLImageElement;
 
   const docBgLayer: HTMLImageElement = document.createElement('img');
   Object.assign(docBgLayer.style, styles);
@@ -108,9 +108,9 @@ export const useDocBgImage = (options: UseDocBgLayerOptions = {}) => {
       }
 
       // 完成新动画后的回调
-      const handleNewTransitionEnd = (event: TransitionEvent) => {
+      const handleNewTransitionEnd = (event: Event) => {
         // 移除回调
-        event.target.removeEventListener('transitionend', handleNewTransitionEnd);
+        event.target?.removeEventListener('transitionend', handleNewTransitionEnd);
         // 解锁
         isSwitching = false;
         // 尝试切换下一个图片

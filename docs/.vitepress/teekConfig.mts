@@ -1,4 +1,5 @@
-// .vitepress/teekConfig.mts
+// noinspection SpellCheckingInspection
+
 import { defineTeekConfig } from "vitepress-theme-teek/config";
 
 // Teek 完整配置：
@@ -14,7 +15,7 @@ export const teekConfig = defineTeekConfig({
   anchorScroll: true,
   // 首页卡片栏列表位置
   homeCardListPosition: 'right',
-  // 首页卡片的位置排序，当设置了 `homeCardSort` 但没有全部补全，则剩余内容默认按照 `homeCardSort` 的顺序进行排序
+  // 首页卡片的位置排序，当设置了 `homeCardSort` 但没有设置全部五个值，则剩余内容默认按照 `homeCardSort` 的顺序进行排序
   homeCardSort: [ 'topArticle', 'category', 'tag', 'friendLink', 'docAnalysis' ],
   // 主题背景色，用于精选文章卡片的 top + sticky 功能和标签卡片的背景色，支持在首页 index.md 的 frontmatter 配置 tk.bgColor
   // tagColor: [

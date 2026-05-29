@@ -4,10 +4,10 @@
 </template>
 
 <script setup lang="ts">
-import { TkArticleShare, TkVpContainer } from "vitepress-theme-teek";
-import { useData, useRoute } from "vitepress";
 import { computed } from "vue";
-import type { VpContainerProps } from "vitepress-theme-teek/lib/components/common/VpContainer/src/vpContainer"
+import { useData, useRoute } from "vitepress";
+import { TkArticleShare, TkVpContainer } from "vitepress-theme-teek";
+import { VpContainerProps } from "vitepress-theme-teek/lib/components/common/vp-container/src/vp-container";
 
 const { theme, frontmatter } = useData();
 
