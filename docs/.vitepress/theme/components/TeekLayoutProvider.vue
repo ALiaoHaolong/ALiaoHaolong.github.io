@@ -21,6 +21,11 @@
       <HomeCardTagAfter />
     </template>
 
+    <!-- 首页友情链接前的待办卡片 -->
+    <template #teek-home-card-friend-link-before>
+      <HomeCardFriendLinkBefore />
+    </template>
+
     <!-- 博客风文章页 Banner 背景图作者及来源标注 -->
     <template #teek-article-banner-info-bottom>
       <ArticleBannerInfoBottom />
@@ -53,6 +58,7 @@ import { useDocBgImage } from "../composables/useDocBgImage.ts";
 import HomeBannerContentAfter from "./HomeBannerContentAfter.vue";
 import HomeCardMyAvatarBefore from "./HomeCardMyAvatarBefore.vue";
 import HomeCardTagAfter from "./HomeCardTagAfter.vue";
+import HomeCardFriendLinkBefore from "./HomeCardFriendLinkBefore.vue";
 import ArticleBannerInfoBottom from "./ArticleBannerInfoBottom.vue";
 import ArticleBottomTipBefore from "./ArticleBottomTipBefore.vue";
 import ArchivesTopBefore from "./ArchivesTopBefore.vue";
