@@ -1,5 +1,5 @@
 <template>
-  <ContributeHeatmapChart
+  <LhlContributeHeatmapChart
     :height="260"
     :calender-left="'center'"
     :calendar-range="screenWidth => {
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { formatDate } from "vitepress-theme-teek";
-import ContributeHeatmapChart from "@/components/theme/ContributeHeatmapChart.vue";
+import { LhlContributeHeatmapChart } from "@/components/theme";
 </script>
 
 <style scoped lang="scss">

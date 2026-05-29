@@ -1,6 +1,6 @@
 <template>
   <TkPageCard :title="quill + '羽落成章'">
-    <ContributeHeatmapChart
+    <LhlContributeHeatmapChart
       :height="165"
       :calender-top="0"
       :calender-left="26"
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { TkPageCard, formatDate } from "vitepress-theme-teek";
-import ContributeHeatmapChart from "@/components/theme/ContributeHeatmapChart.vue";
+import { LhlContributeHeatmapChart } from "@/components/theme";
 import { quill } from "@/icons";
 </script>
 

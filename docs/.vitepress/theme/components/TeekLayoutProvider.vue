@@ -8,42 +8,42 @@
 
     <!-- 首页 Banner 背景图作者及来源标注 -->
     <template #teek-home-banner-content-after>
-      <HomeBannerContentAfter />
+      <LhlHomeBannerContentAfter />
     </template>
 
     <!-- 首页个人卡片背景图来源标注 -->
     <template #teek-home-card-my-avatar-before>
-      <HomeCardMyAvatarBefore />
+      <LhlHomeCardMyAvatarBefore />
     </template>
 
     <!-- 首页标签卡片后的贡献卡片 -->
     <template #teek-home-card-tag-after>
-      <HomeCardTagAfter />
+      <LhlHomeCardTagAfter />
     </template>
 
     <!-- 首页友情链接前的待办卡片 -->
     <template #teek-home-card-friend-link-before>
-      <HomeCardFriendLinkBefore />
+      <LhlHomeCardFriendLinkBefore />
     </template>
 
     <!-- 博客风文章页 Banner 背景图作者及来源标注 -->
     <template #teek-article-banner-info-bottom>
-      <ArticleBannerInfoBottom />
+      <LhlArticleBannerInfoBottom />
     </template>
 
     <!-- 文章底部版权信息标注 -->
     <template #teek-article-bottom-tip-before>
-      <ArticleBottomTipBefore/>
+      <LhlArticleBottomTipBefore/>
     </template>
 
     <!-- 归档页贡献图 -->
     <template #teek-archives-top-before>
-      <ArchivesTopBefore />
+      <LhlArchivesTopBefore />
     </template>
 
     <!-- 自定义 404 内容 -->
     <template #not-found>
-      <NotFound/>
+      <LhlNotFound/>
     </template>
   </Teek.Layout>
 </template>
@@ -55,14 +55,16 @@ import { nextTick, watch } from "vue";
 import { useRibbon } from "../composables/useRibbon";
 import { useRuntime } from "../composables/useRuntime";
 import { useDocBgImage } from "../composables/useDocBgImage.ts";
-import HomeBannerContentAfter from "./slots/HomeBannerContentAfter.vue";
-import HomeCardMyAvatarBefore from "./slots/HomeCardMyAvatarBefore.vue";
-import HomeCardTagAfter from "./slots/HomeCardTagAfter.vue";
-import HomeCardFriendLinkBefore from "./slots/HomeCardFriendLinkBefore.vue";
-import ArticleBannerInfoBottom from "./slots/ArticleBannerInfoBottom.vue";
-import ArticleBottomTipBefore from "./slots/ArticleBottomTipBefore.vue";
-import ArchivesTopBefore from "./slots/ArchivesTopBefore.vue";
-import NotFound from "./slots/NotFound.vue";
+import {
+  LhlArchivesTopBefore,
+  LhlArticleBannerInfoBottom,
+  LhlArticleBottomTipBefore,
+  LhlHomeBannerContentAfter,
+  LhlHomeCardFriendLinkBefore,
+  LhlHomeCardMyAvatarBefore,
+  LhlHomeCardTagAfter,
+  LhlNotFound,
+} from "./slots";
 
 const { theme, frontmatter } = useData();
 

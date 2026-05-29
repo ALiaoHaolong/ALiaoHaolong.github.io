@@ -7,4 +7,9 @@
       "@/*": ["docs/.vitepress/theme/*"], // config.mts 中配置 @ 符号
     },
   },
+  "include": [ // 组件模块化
+    "docs/.vitepress/theme/**/*.ts",
+    "docs/.vitepress/theme/**/*.d.ts",
+    "docs/.vitepress/theme/**/*.vue"
+  ]
 }

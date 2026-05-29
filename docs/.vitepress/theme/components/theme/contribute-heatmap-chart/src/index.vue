@@ -4,31 +4,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export interface ContributeHeatmapChartOptions {
-  /**
-   * 组件高度
-   */
-  height: number,
-  /**
-   * ECharts 配置 - calender.top
-   */
-  calenderTop?: string | number,
-  /**
-   * ECharts 配置 - calender.left
-   */
-  calenderLeft?: string | number,
-  /**
-   * ECharts 配置 - calender.monthLabel.position
-   */
-  calenderMonthLabelPosition?: string,
-  /**
-   * 范围动态计算回调函数
-   */
-  calendarRange: (screenWidth: number) => string[],
-}
-</script>
-
 <script setup lang="ts">
 import { ref, watch, nextTick, computed, useTemplateRef, onMounted, onUnmounted } from "vue";
 import { useData } from "vitepress";
@@ -37,6 +12,7 @@ import * as echarts from "echarts/core"; // 引入 ECharts
 import { CanvasRenderer } from 'echarts/renderers'; // 引入 Canvas 渲染器
 import { HeatmapChart } from "echarts/charts"; // 热力图
 import { TooltipComponent, CalendarComponent, VisualMapComponent } from 'echarts/components'; // 组件
+import type { ContributeHeatmapChartOptions } from "./types";
 
 // 注册 ECharts 组件
 echarts.use([
@@ -63,7 +39,7 @@ const posts = usePosts();
 // 贡献图数据
 const contributeList = computed(() => {
   // 数据初始化 { "2026-05-01": 2, "2026-05-02": 1, "2026-05-03": 5 }
-  const contributeObject = ref({});
+  const contributeObject: any = ref({});
   // 计数
   posts.value.sortPostsByDate.forEach(item => { // sortPostsByDate 根据日期排序的文章列表
     // 获取文章 date 属性
