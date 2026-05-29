@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { formatDate } from "vitepress-theme-teek";
-import ContributeHeatmapChart from "./ContributeHeatmapChart.vue";
+import ContributeHeatmapChart from "@/components/theme/ContributeHeatmapChart.vue";
 </script>
 
 <style scoped lang="scss">

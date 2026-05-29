@@ -55,14 +55,14 @@ import { nextTick, watch } from "vue";
 import { useRibbon } from "../composables/useRibbon";
 import { useRuntime } from "../composables/useRuntime";
 import { useDocBgImage } from "../composables/useDocBgImage.ts";
-import HomeBannerContentAfter from "./HomeBannerContentAfter.vue";
-import HomeCardMyAvatarBefore from "./HomeCardMyAvatarBefore.vue";
-import HomeCardTagAfter from "./HomeCardTagAfter.vue";
-import HomeCardFriendLinkBefore from "./HomeCardFriendLinkBefore.vue";
-import ArticleBannerInfoBottom from "./ArticleBannerInfoBottom.vue";
-import ArticleBottomTipBefore from "./ArticleBottomTipBefore.vue";
-import ArchivesTopBefore from "./ArchivesTopBefore.vue";
-import NotFound from "./NotFound.vue";
+import HomeBannerContentAfter from "./slots/HomeBannerContentAfter.vue";
+import HomeCardMyAvatarBefore from "./slots/HomeCardMyAvatarBefore.vue";
+import HomeCardTagAfter from "./slots/HomeCardTagAfter.vue";
+import HomeCardFriendLinkBefore from "./slots/HomeCardFriendLinkBefore.vue";
+import ArticleBannerInfoBottom from "./slots/ArticleBannerInfoBottom.vue";
+import ArticleBottomTipBefore from "./slots/ArticleBottomTipBefore.vue";
+import ArchivesTopBefore from "./slots/ArchivesTopBefore.vue";
+import NotFound from "./slots/NotFound.vue";
 
 const { theme, frontmatter } = useData();
 

@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { TkIcon } from "vitepress-theme-teek";
 import { useData } from "vitepress";
-import { image } from "../icons";
+import { image } from "@/icons";
 import { computed } from "vue";
 
 const { frontmatter } = useData();

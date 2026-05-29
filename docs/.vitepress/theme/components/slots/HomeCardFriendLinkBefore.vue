@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { TkPageCard } from "vitepress-theme-teek";
-import { todo } from "../icons";
+import { todo } from "@/icons";
 
 const todoList = [
   {

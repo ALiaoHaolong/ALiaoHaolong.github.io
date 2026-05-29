@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { TkIcon } from "vitepress-theme-teek";
-import { image } from "../icons";
+import { image } from "@/icons";
 
 const link = "https://github.com/ALiaoHaolong/ALiaoHaolong.github.io/blob/master/docs/public/homepage/LiaoHaolong_20150912_raw.jpg";
 </script>

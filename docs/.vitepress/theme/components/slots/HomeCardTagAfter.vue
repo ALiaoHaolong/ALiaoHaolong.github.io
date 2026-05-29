@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import { TkPageCard, formatDate } from "vitepress-theme-teek";
-import ContributeHeatmapChart from "./ContributeHeatmapChart.vue";
-import { quill } from "../icons";
+import ContributeHeatmapChart from "@/components/theme/ContributeHeatmapChart.vue";
+import { quill } from "@/icons";
 </script>
 
 <style scoped lang="scss">

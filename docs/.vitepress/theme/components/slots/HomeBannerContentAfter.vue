@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { TkIcon } from "vitepress-theme-teek";
 import { onMounted, onUnmounted, ref } from "vue";
-import { image } from "../icons";
+import { image } from "@/icons";
 
 // 当前首页横幅背景图信息
 const bannerBgImg = ref<{ coverImgAuthor: string; coverImgPixivId: string } | null>(null);
