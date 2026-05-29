@@ -10,7 +10,8 @@ const vitePressOptions: UserConfig = {
   titleTemplate: ":title - 白羽拾光 🕊️",
   description: "拾起光阴落下的羽毛。",
   head: [
-    [ 'link', { rel: 'icon', href: '/favicon.ico' } ]
+    [ 'link', { rel: 'icon', href: '/favicon.ico' } ],
+    [ "link", { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/qweather-icons@1.8.0/font/qweather-icons.css" } ],
   ],
   lang: 'zh-CN',
   themeConfig: {

@@ -3,6 +3,7 @@ export { default as LhlArticleBannerInfoBottom } from "./ArticleBannerInfoBottom
 export { default as LhlArticleBottomTipBefore } from "./ArticleBottomTipBefore.vue";
 export { default as LhlHomeBannerContentAfter } from "./HomeBannerContentAfter.vue";
 export { default as LhlHomeCardFriendLinkBefore } from "./HomeCardFriendLinkBefore.vue";
+export { default as LhlHomeCardMyAfter } from "./HomeCardMyAfter.vue";
 export { default as LhlHomeCardMyAvatarBefore } from "./HomeCardMyAvatarBefore.vue";
 export { default as LhlHomeCardTagAfter } from "./HomeCardTagAfter.vue";
 export { default as LhlNotFound } from "./NotFound.vue";

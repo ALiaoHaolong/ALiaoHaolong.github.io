@@ -16,6 +16,11 @@
       <LhlHomeCardMyAvatarBefore />
     </template>
 
+    <!-- 首页个人卡片后的天气卡片 -->
+    <template #teek-home-card-my-after>
+      <LhlHomeCardMyAfter />
+    </template>
+
     <!-- 首页标签卡片后的贡献卡片 -->
     <template #teek-home-card-tag-after>
       <LhlHomeCardTagAfter />
@@ -61,6 +66,7 @@ import {
   LhlArticleBottomTipBefore,
   LhlHomeBannerContentAfter,
   LhlHomeCardFriendLinkBefore,
+  LhlHomeCardMyAfter,
   LhlHomeCardMyAvatarBefore,
   LhlHomeCardTagAfter,
   LhlNotFound,
