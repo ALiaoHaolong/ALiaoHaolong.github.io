@@ -335,7 +335,7 @@ export const teekConfig = defineTeekConfig({
           <img src="https://img.shields.io/badge/vitepress-v1.6.4-mediumpurple?logo=vitepress" alt="VitePress">
         </a>
         <a title="Teek" target="_blank" href="https://vp.teek.top/">
-          <img src="https://img.shields.io/badge/teek-v1.5.7-cornflowerblue" alt="Teek">
+          <img src="https://img.shields.io/badge/teek-v1.6.0-cornflowerblue" alt="Teek">
         </a>
         <a title="VitePress I18n" target="_blank" href="https://vitepress-i18n.cdget.com/">
           <img src="https://img.shields.io/badge/vitepress--i18n-v1.3.5-palevioletred" alt="VitePress I18n">
