@@ -2,6 +2,7 @@ import { defineConfig, UserConfig } from 'vitepress'
 import { withI18n } from 'vitepress-i18n'
 import { VitePressI18nOptions } from "vitepress-i18n/types";
 import { teekConfig } from './teekConfig.mts'
+import path from 'path';
 
 // VitePress 基础配置 https://vitepress.dev/zh/
 const vitePressOptions: UserConfig = {
@@ -42,6 +43,13 @@ const vitePressOptions: UserConfig = {
   lastUpdated: true, // 显示最后更新时间（基于 /git log 的时间）
   markdown: {
     lineNumbers: true, // 启用行号
+  },
+  vite: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './theme'),
+      }
+    },
   },
   extends: teekConfig,
 }

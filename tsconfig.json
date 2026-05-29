@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".", // config.mts 中配置 @ 符号
     "allowImportingTsExtensions": true, // 修复 config.mts 中的导入错误
     "moduleResolution": "bundler", // 修复 teekConfig.mts 中的导入错误
-  }
+    "paths": {
+      "@/*": ["docs/.vitepress/theme/*"], // config.mts 中配置 @ 符号
+    },
+  },
 }
