@@ -1,5 +1,5 @@
 <template>
-  <LhlHomeCardWeather v-if="false" />
+  <LhlHomeCardWeather />
 </template>
 
 <script setup lang="ts">

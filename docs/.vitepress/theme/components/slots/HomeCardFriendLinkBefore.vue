@@ -15,10 +15,6 @@ import { todo } from "@/icons";
 
 const todoList = [
   {
-    text: "天气卡片",
-    tooltip: "可翻页，每页一天天气，支持 7 天预报",
-  },
-  {
     text: "组件工程化",
     tooltip: "解耦插槽组件与功能组件；组件结构调整",
   },
