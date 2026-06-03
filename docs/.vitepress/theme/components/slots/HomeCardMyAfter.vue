@@ -1,9 +1,9 @@
 <template>
-  <LhlHomeCardWeatherForecast v-if="false" />
+  <LhlHomeCardWeather v-if="false" />
 </template>
 
 <script setup lang="ts">
-import { LhlHomeCardWeatherForecast } from "@/components/theme";
+import { LhlHomeCardWeather } from "@/components/theme";
 </script>
 
 <style scoped lang="scss">
