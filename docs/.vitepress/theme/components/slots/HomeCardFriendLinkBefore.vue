@@ -15,10 +15,6 @@ import { todo } from "@/icons";
 
 const todoList = [
   {
-    text: "组件工程化",
-    tooltip: "解耦插槽组件与功能组件；组件结构调整",
-  },
-  {
     text: "图片目录的结构调整",
     tooltip: "将文章名作为图片目录名",
   },
