@@ -15,7 +15,7 @@
       <div v-if="!isLoading && !isError" style="display: flex;justify-content: space-between;margin: 10px 0;padding: 0 5px;">
         <div>
           <div>西安市</div>
-          <div style="display: flex;align-items: end;margin: 0 0 8px 0;">
+          <div style="display: flex;align-items: end;">
             <div style="padding: 0;font-size: 3rem;line-height: normal;">{{weatherData?.current.temperature_2m}}°</div>
             <div>晴</div>
           </div>
@@ -27,20 +27,20 @@
       <!-- 最高温/最低温/风向风力 -->
       <div style="display: flex;justify-content: space-between;margin: 10px 0;padding: 0 5px;">
         <div ref="maxTemperatureEl" :style="{ minWidth: maxWidth + 'px' }" style="display: flex;flex-direction: column;align-items: center;">
-          <div>最高温</div>
+          <div style="font-size: 0.85rem;color: var(--vp-c-text-2);">最高温</div>
           <div>{{weatherData?.daily.temperature_2m_max[1]}}°</div>
         </div>
         <div ref="minTemperatureEl" :style="{ minWidth: maxWidth + 'px' }" style="display: flex;flex-direction: column;align-items: center;">
-          <div>最低温</div>
+          <div style="font-size: 0.85rem;color: var(--vp-c-text-2);">最低温</div>
           <div>{{weatherData?.daily.temperature_2m_min[1]}}°</div>
         </div>
         <div ref="windDirectionEl" :style="{ minWidth: maxWidth + 'px' }" style="display: flex;flex-direction: column;align-items: center;">
-          <div>东风</div>
+          <div style="font-size: 0.85rem;color: var(--vp-c-text-2);">东风</div>
           <div>1 级</div>
         </div>
       </div>
       <!-- 分隔线 -->
-      <div style="margin: 10px calc(var(--tk-home-card-padding) * -1);height: 1px;background-color: var(--tk-text-color-regular);opacity: .2;"></div>
+      <div style="margin: 10px calc(var(--tk-home-card-padding) * -1);height: 1px;background-color: var(--vp-c-divider);"></div>
       <!-- 预报 -->
       <TransitionGroup
         v-if="!isLoading && !isError"
@@ -55,8 +55,8 @@
             <div style="">{{ formatDate(forecast.time) }}</div>
           </div>
           <!-- 预报内容 -->
-          <div style="display: flex;justify-content: space-between;align-items: flex-end;margin: 10px 0;padding: 0 5px;">
-            <div style="font-size: 4.5rem;opacity: .75;"><i :class="'qi-' + weatherDescription(forecast.weatherCode)"></i></div>
+          <div style="display: flex;justify-content: space-between;align-items: flex-end;margin: 10px 0 5px;padding: 0 5px;">
+            <div style="font-size: 4.5rem;opacity: .5;"><i :class="'qi-' + weatherDescription(forecast.weatherCode)"></i></div>
             <div style="">{{ Math.round(forecast.tempMin) }}° ~ {{ Math.round(forecast.tempMax) }}°</div>
           </div>
         </div>
