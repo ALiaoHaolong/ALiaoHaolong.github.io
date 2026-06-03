@@ -16,7 +16,7 @@
         <div>
           <div>西安市</div>
           <div style="display: flex;align-items: end;">
-            <div style="padding: 0;font-size: 3rem;line-height: normal;">{{weatherData.current.temperature_2m}}°</div>
+            <div style="padding: 0;font-size: 3rem;line-height: normal;">{{ weatherData.current.temperature_2m }}°</div>
             <div>{{ getWeatherInfo(weatherData.current.weather_code).text }}</div>
           </div>
         </div>
@@ -28,26 +28,21 @@
       <div style="display: flex;justify-content: space-between;margin: 10px 0;padding: 0 5px;">
         <div ref="maxTemperatureEl" :style="{ minWidth: maxWidth + 'px' }" style="display: flex;flex-direction: column;align-items: center;">
           <div style="font-size: 0.85rem;color: var(--vp-c-text-2);">最高温</div>
-          <div>{{weatherData.daily.temperature_2m_max[1]}}°</div>
+          <div>{{ weatherData.daily.temperature_2m_max[1] }}°</div>
         </div>
         <div ref="minTemperatureEl" :style="{ minWidth: maxWidth + 'px' }" style="display: flex;flex-direction: column;align-items: center;">
           <div style="font-size: 0.85rem;color: var(--vp-c-text-2);">最低温</div>
-          <div>{{weatherData.daily.temperature_2m_min[1]}}°</div>
+          <div>{{ weatherData.daily.temperature_2m_min[1] }}°</div>
         </div>
         <div ref="windDirectionEl" :style="{ minWidth: maxWidth + 'px' }" style="display: flex;flex-direction: column;align-items: center;">
           <div style="font-size: 0.85rem;color: var(--vp-c-text-2);">{{ windDirectionToText(weatherData.current.wind_direction_10m) }}风</div>
-          <div>{{windSpeedToLevel(weatherData.current.wind_speed_10m)}} 级</div>
+          <div>{{ windSpeedToLevel(weatherData.current.wind_speed_10m) }} 级</div>
         </div>
       </div>
       <!-- 分隔线 -->
       <div style="margin: 10px calc(var(--tk-home-card-padding) * -1);height: 1px;background-color: var(--vp-c-divider);"></div>
       <!-- 预报 -->
-      <TransitionGroup
-        v-if="!isLoading && !isError"
-        :name="transitionName"
-        tag="div"
-        mode="out-in"
-      >
+      <TransitionGroup v-if="!isLoading && !isError" :name="transitionName" tag="div" mode="out-in">
         <div v-for="forecast in currentForecast" :key="forecast.time">
           <!-- 日期行 -->
           <div style="display: flex;justify-content: space-between;margin: 10px 0;padding: 0 5px;">
@@ -56,7 +51,9 @@
           </div>
           <!-- 预报内容 -->
           <div style="display: flex;justify-content: space-between;align-items: flex-end;margin: 10px 0 5px;padding: 0 5px;">
-            <div style="font-size: 4.5rem;opacity: .5;"><i :class="'qi-' + getWeatherInfo(forecast.weatherCode).id"></i></div>
+            <div style="font-size: 4.5rem;opacity: .5;">
+              <i :class="'qi-' + getWeatherInfo(forecast.weatherCode).id"></i>
+            </div>
             <div style="display: flex;flex-direction: column;align-items: end;">
               <div>{{ getWeatherInfo(forecast.weatherCode).text }}</div>
               <div style="">{{ windDirectionToText(forecast.windDirection) }}风 {{ windSpeedToLevel(forecast.windSpeed) }} 级</div>
@@ -74,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, watch, nextTick } from 'vue';
+import { ref, onMounted, computed, watch, nextTick, onUnmounted } from 'vue';
 import { TkPageCard } from 'vitepress-theme-teek';
 import { weather } from "@/icons";
 import { WeatherData } from "./types";
@@ -152,7 +149,14 @@ const weatherData = ref<WeatherData>({
   }
 });
 // 存储当前显示的日期的预报数据
-const currentForecast = computed<{time: string, weatherCode: number, tempMax: number, tempMin: number, windSpeed: number, windDirection: number}[]>(() => {
+const currentForecast = computed<{
+  time: string,
+  weatherCode: number,
+  tempMax: number,
+  tempMin: number,
+  windSpeed: number,
+  windDirection: number
+}[]>(() => {
   return [{
     time: weatherData.value.daily.time[pageNum.value - 1] || '',
     weatherCode: weatherData.value.daily.weather_code[pageNum.value - 1] ?? 0,
@@ -227,7 +231,7 @@ const fetchWeather = async () => {
 
   // 缓存不存在或已过期，请求数据
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=34.2583&longitude=108.9286&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FTokyo&past_days=1`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=34.2583&longitude=108.9286&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FShanghai&past_days=1`;
     const response = await fetch(url);
     const result: WeatherData = await response.json();
 
@@ -243,7 +247,44 @@ const fetchWeather = async () => {
   }
 };
 
+// 定时刷新天气数据
+let refreshTimer: ReturnType<typeof setInterval>;
+
+// 首次执行计划
+const scheduleWeatherRefresh = () => {
+  // 刷新数据
+  fetchWeather();
+
+  // 计算首次延迟
+  const current = new Date();
+  // 每小时的第 1 分钟、16 分钟、31 分钟、46 分钟执行
+  const targetMinutes = [1, 16, 31, 46];
+  // 计算下一次执行的分钟数
+  let nextTarget = targetMinutes.find(m => m > current.getMinutes());
+  if (nextTarget === undefined) {
+    nextTarget = targetMinutes[0];
+  }
+  // 计算下一次执行的小时数
+  const next = new Date(current);
+  next.setMinutes(nextTarget, 0, 0);
+  if (next <= current) next.setHours(next.getHours() + 1);
+
+  // 设置首次延迟
+  setTimeout(() => {
+    // 下一次执行
+    fetchWeather();
+    // 启动定时器，此后间隔 15 分钟执行一次
+    refreshTimer = setInterval(fetchWeather, 15 * 60 * 1000);
+  }, next.getTime() - current.getTime());
+};
+
 watch(weatherData, () => nextTick(calculateMaxWidth));
+
+onMounted(scheduleWeatherRefresh);
+
+onUnmounted(() => {
+  clearInterval(refreshTimer);
+});
 
 onMounted(fetchWeather);
 </script>
@@ -257,6 +298,7 @@ onMounted(fetchWeather);
 .tk-slide-next-leave-active > div:first-child {
   margin-top: 0 !important;
 }
+
 // 为避免出现其他可能的问题，同样禁用最后一个元素的 margin-bottom
 .tk-slide-prev-leave-active > div:last-child,
 .tk-slide-next-leave-active > div:last-child {
