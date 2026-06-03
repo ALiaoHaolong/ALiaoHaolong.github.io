@@ -1,4 +1,4 @@
-export interface WeatherForecastData {
+export interface WeatherData {
   /**
    * 经度
    */
