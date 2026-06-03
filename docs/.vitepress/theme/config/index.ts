@@ -1,0 +1,1 @@
+export { getWeatherInfo } from "@/config/weatherCodeMap.ts";
