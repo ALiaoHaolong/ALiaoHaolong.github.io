@@ -40,9 +40,21 @@ export interface WeatherData {
      */
     interval: string;
     /**
-     * 温度单位
+     * 温度单位（距离地面 2 米）
      */
     temperature_2m: string;
+    /**
+     * 天气代码单位
+     */
+    weather_code: string;
+    /**
+     * 风速单位（距离地面 10 米）
+     */
+    wind_speed_10m: string;
+    /**
+     * 风向单位（距离地面 10 米）
+     */
+    wind_direction_10m: string;
   };
   /**
    * 当前天气数据
@@ -60,6 +72,18 @@ export interface WeatherData {
      * 当前温度
      */
     temperature_2m: number;
+    /**
+     * 天气代码
+     */
+    weather_code: number;
+    /**
+     * 风速
+     */
+    wind_speed_10m: number;
+    /**
+     * 风向
+     */
+    wind_direction_10m: number;
   };
   /**
    * 每日天气预报数据单位
@@ -74,13 +98,21 @@ export interface WeatherData {
      */
     weather_code: string;
     /**
-     * 最高温度单位
+     * 最高温度单位（距离地面 2 米）
      */
     temperature_2m_max: string;
     /**
-     * 最低温度单位
+     * 最低温度单位（距离地面 2 米）
      */
     temperature_2m_min: string;
+    /**
+     * 最大风速单位（距离地面 10 米）
+     */
+    wind_speed_10m_max: string;
+    /**
+     * 主要风向单位（距离地面 10 米）
+     */
+    wind_direction_10m_dominant: string;
   };
   /**
    * 每日天气预报数据
@@ -102,5 +134,13 @@ export interface WeatherData {
      * 最低温度列表（有序）
      */
     temperature_2m_min: number[];
+    /**
+     * 最大风速列表（有序）
+     */
+    wind_speed_10m_max: number[];
+    /**
+     * 主要风向列表（有序）
+     */
+    wind_direction_10m_dominant: number[];
   };
 }
