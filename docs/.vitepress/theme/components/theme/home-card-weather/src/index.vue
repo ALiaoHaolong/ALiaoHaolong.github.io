@@ -1,4 +1,5 @@
 <template>
+  <!-- style 用于修复预报卡片在播放自动切换动画时会超出卡片范围显示的问题 -->
   <TkPageCard
     :page="true"
     v-model="pageNum"
@@ -9,7 +10,6 @@
     :pageSpeed="tagConfig.pageSpeed"
     style="position: relative;overflow: hidden;"
   >
-    <!-- 修复预报卡片自动切换动画超出卡片范围显示 -->
     <template #default="{ transitionName }">
       <div v-if="!isLoading && !isError">
         <!-- 主天气 -->
@@ -98,8 +98,8 @@ const calculateMaxWidth = () => {
 };
 
 // 状态
-const isLoading = ref(false)
-const isError = ref(false)
+const isLoading = ref(true);
+const isError = ref(false);
 // 卡片
 const pageNum = ref(2);
 const tagConfig = {
@@ -216,7 +216,6 @@ const windDirectionToText = (degrees: number): string => {
 
 // 获取天气数据
 const fetchWeather = async () => {
-  isLoading.value = true;
   isError.value = false;
 
   // 检查缓存
@@ -244,6 +243,8 @@ const fetchWeather = async () => {
   } catch (err) {
     // In case an error occurs, for example a URL parameter is not correctly specified, a JSON error object is returned with an HTTP 400 status code.
     console.error(err);
+    // 出现错误后，isLoading 恢复默认值，以使得下一次刷新数据的时候，能够正常显示正在加载中...
+    isLoading.value = true;
     isError.value = true;
   } finally {
     isLoading.value = false;
@@ -288,8 +289,6 @@ onMounted(scheduleWeatherRefresh);
 onUnmounted(() => {
   clearInterval(refreshTimer);
 });
-
-onMounted(fetchWeather);
 </script>
 
 <style scoped lang="scss">
