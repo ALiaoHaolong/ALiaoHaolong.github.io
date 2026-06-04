@@ -16,6 +16,10 @@ export interface ContributeHeatmapChartOptions {
    */
   calenderMonthLabelPosition?: string,
   /**
+   * 暗色模式下的边框颜色
+   */
+  darkBgColor: string,
+  /**
    * 范围动态计算回调函数
    */
   calendarRange: (screenWidth: number) => string[],

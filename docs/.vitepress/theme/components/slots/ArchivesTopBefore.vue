@@ -2,6 +2,7 @@
   <LhlContributeHeatmapChart
     :height="260"
     :calender-left="'center'"
+    dark-bg-color="#1b1b1f"
     :calendar-range="calendarRange"
   />
 </template>

@@ -153,13 +153,13 @@ const option = {
 // 渲染贡献图
 const renderChart = (data: any) => {
   // 适配暗色模式
-  option.tooltip.backgroundColor = isDark.value ? "#1b1b1f;" : "#fff;"; // 同 borderColor
+  option.tooltip.backgroundColor = isDark.value ? props.darkBgColor : "#fff;"; // 同 borderColor
   option.tooltip.textStyle.color = isDark.value ? "#dfdfd6" : "#3c3c43"; // --vp-c-text-1
-  option.calendar.itemStyle.borderColor = isDark.value ? "#1b1b1f" : "#fff"; // 保留 Teek 设置
+  option.calendar.itemStyle.borderColor = isDark.value ? props.darkBgColor : "#fff"; // 保留 Teek 设置
   option.calendar.itemStyle.color = isDark.value ? "#303035" : "#ebedf0"; // 原 Teek 的暗色模式过亮，调暗
   option.calendar.dayLabel.color = isDark.value ? "#98989f" : "#67676c"; // --vp-c-text-2
   option.calendar.monthLabel.color = isDark.value ? "#98989f" : "#67676c"; // --vp-c-text-2
-  option.calendar.yearLabel.color = isDark.value ? "#6a6a71" : "#929295"; // --vp-c-text-3
+  option.calendar.yearLabel.color = isDark.value ? "#98989f" : "#67676c"; // --vp-c-text-2
   // 销毁实例
   if (contributeChart.value) echarts.dispose(contributeChart.value);
   // 初始化实例

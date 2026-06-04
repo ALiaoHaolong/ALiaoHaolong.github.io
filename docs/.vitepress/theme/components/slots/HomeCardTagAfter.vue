@@ -4,7 +4,8 @@
       :height="165"
       :calender-top="0"
       :calender-left="26"
-      :calender-month-label-position="'end'"
+      calender-month-label-position="end"
+      dark-bg-color="#202127"
       :calendar-range="calendarRange"
     />
   </TkPageCard>
