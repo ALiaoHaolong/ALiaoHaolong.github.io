@@ -86,3 +86,22 @@
 .tk-article-page {
     padding: 0;
 }
+
+/* 文档风格侧边栏中，重写目录名的样式（默认样式与文章样式一样，非常的看不出来目录结构） */
+
+/* 一级目录间增加分隔 */
+.VPSidebarItem.level-1:not(.is-link):not(:first-child) h3.text {
+    margin-top: 10px;
+    margin-left: -10px;
+    padding-top: 14px;
+    padding-left: 10px;
+    border-top: 1px solid var(--vp-c-divider);
+}
+
+/* 一级、二级目录文字样式 */
+
+.VPSidebarItem.level-1:not(.is-link) h3.text,
+.VPSidebarItem.level-1:not(.is-link) h4.text {
+    color: var(--vp-c-text-1);
+    font-weight: bold;
+}
