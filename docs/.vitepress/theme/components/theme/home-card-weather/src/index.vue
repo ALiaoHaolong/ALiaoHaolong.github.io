@@ -6,6 +6,7 @@
     :page-size="tagConfig.limit"
     :total="tagConfig.total"
     :title="weather + '鸽观天象'"
+    :title-click="fetchWeather"
     :autoPage="tagConfig.autoPage"
     :pageSpeed="tagConfig.pageSpeed"
     style="position: relative;overflow: hidden;"
@@ -66,9 +67,9 @@
         </TransitionGroup>
       </div>
 
-      <div v-else-if="isError">获取天气数据失败</div>
+      <div v-else-if="isError">天气更新失败，<a class="hover-color" @click="fetchWeather()">点此重试</a></div>
 
-      <div v-else-if="isLoading">获取天气数据中...</div>
+      <div ref="isLoadingEl" v-else-if="isLoading"></div>
     </template>
   </TkPageCard>
 </template>
@@ -76,9 +77,10 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, watch, nextTick, onUnmounted } from 'vue';
 import { TkPageCard } from 'vitepress-theme-teek';
+import { getWeatherInfo } from "@/config";
 import { weather } from "@/icons";
 import { WeatherData } from "./types";
-import { getWeatherInfo } from "@/config";
+import { formatDay, formatDate, windDirectionToText, windSpeedToLevel } from "./utils";
 
 // 缓存
 const WEATHER_DATA_STORAGE_KEY = 'weather-data' as const;
@@ -99,6 +101,7 @@ const calculateMaxWidth = () => {
 
 // 状态
 const isLoading = ref(true);
+const isFetching = ref(false); // 请求锁
 const isError = ref(false);
 // 卡片
 const pageNum = ref(2);
@@ -108,6 +111,24 @@ const tagConfig = {
   autoPage: true, // 自动翻页
   pageSpeed: 8000, // 页面切换间隔
 };
+
+// isLoadingEl 打字机效果
+const isLoadingEl = ref<HTMLElement | null>(null);
+// isLoadingEl 元素挂载时启动打字机效果
+watch(isLoadingEl, () => {
+  if (isLoadingEl.value) {
+    const text = '观测中 . . .';
+    let index = 0;
+    const typing = () => {
+      if (isLoadingEl.value && index < text.length) {
+        isLoadingEl.value.textContent += text[index];
+        index++;
+        setTimeout(typing, index < 3 ? 400 : 200);
+      }
+    };
+    typing();
+  }
+});
 
 // 存储全部天气数据
 const weatherData = ref<WeatherData>({
@@ -170,92 +191,64 @@ const currentForecast = computed<{
   }];
 });
 
-// 格式化日期：昨天，今天，明天，周几
-const formatDay = (dateStr: string): string => {
-  const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-  const today = new Date();
-  const date = new Date(dateStr);
-  if (today.getDay() !== date.getDay() && today.getTime() > date.getTime())
-    return '昨天';
-  if (today.getDay() === date.getDay())
-    return '今天';
-  if (today.getDay() === (date.getDay() + 6) % 7)
-    return '明天';
-  return weekdays[date.getDay()];
-};
-
-// 格式化日期：月/日
-const formatDate = (dateStr: string): string => {
-  const date = new Date(dateStr);
-  return date.getMonth() + '/' + date.getDate()
-}
-
-// 风速转风级
-const windSpeedToLevel = (speedKmh: number): number => {
-  const ranges = [0, 1, 6, 12, 20, 29, 39, 50, 62, 75, 89, 103, 118];
-  let level = 0;
-  for (let i = 0; i < ranges.length; i++) {
-    if (speedKmh >= ranges[i]) level = i;
-    else break;
-  }
-  return level;
-};
-
-// 风向角度转风向文本
-const windDirectionToText = (degrees: number): string => {
-  const deg = ((degrees % 360) + 360) % 360; // 归一化到 [0, 360)
-  if (deg < 22.5 || deg >= 337.5) return '北';
-  if (deg < 67.5) return '东北';
-  if (deg < 112.5) return '东';
-  if (deg < 157.5) return '东南';
-  if (deg < 202.5) return '南';
-  if (deg < 247.5) return '西南';
-  if (deg < 292.5) return '西';
-  return '西北';
-};
-
 // 获取天气数据
 const fetchWeather = async () => {
+  // 过滤重复请求
+  if (isFetching.value === true) return;
+  // 加锁
+  isFetching.value = true;
+
+  // 重置相关状态
+  isLoading.value = true;
   isError.value = false;
+  pageNum.value = 2;
 
-  // 检查缓存
-  const cached = localStorage.getItem(WEATHER_DATA_STORAGE_KEY); // 获取缓存
-  if (cached) { // 如果缓存存在
-    // 获取保存的数据
-    const data: WeatherData = JSON.parse(cached);
-    // 如果上次请求在 15 分钟内，则直接使用缓存数据
-    if (Date.now() - new Date(data.current.time).getTime() < 15 * 60 * 1000) {
-      weatherData.value = data;
-      isLoading.value = false;
-      return;
+  // 延迟处理，打印机效果 + 降频
+  setTimeout(async () => {
+    // 检查缓存
+    const cached = localStorage.getItem(WEATHER_DATA_STORAGE_KEY); // 获取缓存
+    if (cached) { // 如果缓存存在
+      // 获取保存的数据
+      const data: WeatherData = JSON.parse(cached);
+      // 如果上次请求在 15 分钟内，则直接使用缓存数据
+      if (Date.now() - new Date(data.current.time).getTime() < 15 * 60 * 1000) {
+        weatherData.value = data;
+        // 返回
+        isLoading.value = false;
+        // 释放锁
+        isFetching.value = false;
+        return;
+      }
     }
-  }
 
-  // 缓存不存在或已过期，请求数据
-  try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=34.2583&longitude=108.9286&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FShanghai&past_days=1`;
-    const response = await fetch(url);
-    const result: WeatherData = await response.json();
+    // 缓存不存在或已过期，请求数据
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=34.2583&longitude=108.9286&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FShanghai&past_days=1`;
+      const response = await fetch(url);
+      const result: WeatherData = await response.json();
 
-    // 更新数据并存入缓存
-    weatherData.value = result;
-    localStorage.setItem(WEATHER_DATA_STORAGE_KEY, JSON.stringify(result));
-  } catch (err) {
-    // In case an error occurs, for example a URL parameter is not correctly specified, a JSON error object is returned with an HTTP 400 status code.
-    console.error(err);
-    // 出现错误后，isLoading 恢复默认值，以使得下一次刷新数据的时候，能够正常显示正在加载中...
-    isLoading.value = true;
-    isError.value = true;
-  } finally {
-    isLoading.value = false;
-  }
+      // 更新数据并存入缓存
+      weatherData.value = result;
+      localStorage.setItem(WEATHER_DATA_STORAGE_KEY, JSON.stringify(result));
+      // 返回
+      isLoading.value = false;
+    } catch (err) {
+      // In case an error occurs, for example a URL parameter is not correctly specified, a JSON error object is returned with an HTTP 400 status code.
+      console.error(err);
+      // 返回
+      isError.value = true;
+    } finally {
+      // 释放锁
+      isFetching.value = false;
+    }
+  }, 3000);
 };
 
 // 定时刷新天气数据
 let refreshTimer: ReturnType<typeof setInterval>;
 
 // 首次执行计划
-const scheduleWeatherRefresh = () => {
+const initFetchWeather = () => {
   // 刷新数据
   fetchWeather();
 
@@ -284,7 +277,7 @@ const scheduleWeatherRefresh = () => {
 
 watch(weatherData, () => nextTick(calculateMaxWidth));
 
-onMounted(scheduleWeatherRefresh);
+onMounted(initFetchWeather);
 
 onUnmounted(() => {
   clearInterval(refreshTimer);
