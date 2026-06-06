@@ -47,11 +47,11 @@
         <TransitionGroup v-if="!isLoading && !isError" :name="transitionName" tag="div" mode="out-in">
           <div v-for="forecast in currentForecast" :key="forecast.time">
             <div style="display: flex;justify-content: space-between;margin-bottom: 10px;padding: 0 5px;">
-              <div style="">{{ formatDay(forecast.time) }}</div>
+              <div :id="`forecast-day-${forecast.time}`" :style="{ minWidth: forecastMaxWidth + 'px' }" style="text-align: left;">{{ formatDay(forecast.time) }}</div>
               <div style="margin-top: 10px;">
                 <i :class="'qi-' + getWeatherInfo(forecast.weatherCode).id" style="font-size: 4rem;opacity: .5;"></i>
               </div>
-              <div style="">{{ formatDate(forecast.time) }}</div>
+              <div :id="`forecast-date-${forecast.time}`" :style="{ minWidth: forecastMaxWidth + 'px' }" style="text-align: right;">{{ formatDate(forecast.time) }}</div>
             </div>
             <div style="display: flex;justify-content: space-between;padding: 0 5px;">
               <div style="display: flex;">
@@ -85,7 +85,7 @@ import { formatDay, formatDate, windDirectionToText, windSpeedToLevel } from "./
 // 缓存
 const WEATHER_DATA_STORAGE_KEY = 'lhl:weather' as const;
 
-// 样式
+// 动态宽度
 const maxTemperatureEl = ref<HTMLElement | null>(null);
 const minTemperatureEl = ref<HTMLElement | null>(null);
 const windDirectionEl = ref<HTMLElement | null>(null);
@@ -97,6 +97,25 @@ const calculateMaxWidth = () => {
     windDirectionEl.value?.offsetWidth || 0,
   ];
   maxWidth.value = Math.max(...widths);
+};
+const forecastMaxWidth = ref(0);
+const calculateForecastMaxWidth = () => {
+  const forecastDayEl = document.querySelector(`#forecast-day-${currentForecast.value[0]?.time}`) as HTMLElement;
+  const forecastDateEl = document.querySelector(`#forecast-date-${currentForecast.value[0]?.time}`) as HTMLElement;
+  // 重置最小宽度
+  // 修复在新元素更窄时，受旧元素的较大的最小宽度值影响，导致新元素宽度无法变小
+  if (forecastDayEl && forecastDateEl) {
+    forecastDayEl.style.minWidth = '0px';
+    forecastDateEl.style.minWidth = '0px';
+  }
+  // 延迟到下一 tick 重新计算
+  nextTick(() => {
+    const widths = [
+      forecastDayEl.offsetWidth || 0,
+      forecastDateEl.offsetWidth || 0,
+    ];
+    forecastMaxWidth.value = Math.max(...widths);
+  })
 };
 
 // 状态
@@ -275,7 +294,14 @@ const initFetchWeather = () => {
   }, next.getTime() - current.getTime());
 };
 
-watch(weatherData, () => nextTick(calculateMaxWidth));
+watch(weatherData, () => {
+  nextTick(calculateMaxWidth);
+  nextTick(calculateForecastMaxWidth);
+});
+
+watch(pageNum, () => {
+  nextTick(calculateForecastMaxWidth);
+});
 
 onMounted(initFetchWeather);
 
