@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { LhlHomeCardWeather } from "@/components/theme";
+import { LhlHomeCardWeather } from "@/components/modules";
 </script>
 
 <style scoped lang="scss">

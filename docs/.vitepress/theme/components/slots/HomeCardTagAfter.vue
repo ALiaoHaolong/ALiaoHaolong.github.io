@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { TkPageCard, formatDate } from "vitepress-theme-teek";
-import { LhlContributeHeatmapChart } from "@/components/theme";
+import { LhlContributeHeatmapChart } from "@/components/modules";
 import { quill } from "@/icons";
 
 const calendarRange = (screenWidth: number): string[] => {

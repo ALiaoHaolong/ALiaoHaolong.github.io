@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { formatDate } from "vitepress-theme-teek";
-import { LhlContributeHeatmapChart } from "@/components/theme";
+import { LhlContributeHeatmapChart } from "@/components/modules";
 
 const calendarRange = (screenWidth: number): string[] => {
   // 动态日期计算的屏幕宽度阈值
