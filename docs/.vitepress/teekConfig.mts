@@ -280,7 +280,7 @@ export const teekConfig = defineTeekConfig({
       tryRequest: false, // 如果请求网站流量统计接口失败，是否重试
       tryCount: 5, // 重试次数，仅当 tryRequest 为 true 时有效
       tryIterationTime: 2000, // 重试间隔时间，单位：毫秒，仅当 tryRequest 为 true 时有效
-      permalink: true, // 是否只统计永久链接的浏览量，如果为 false，则统计 VitePress 默认的文档目录链接
+      permalink: false, // 如果为 true，分别统计同一页面的永久链接与文档链接的访问次数；如果为 false，合并统计永久链接与文档链接的访问次数
     },
     // 自定义现有信息
     overrideInfo: [
