@@ -83,7 +83,7 @@ import { WeatherData } from "./types";
 import { formatDay, formatDate, windDirectionToText, windSpeedToLevel } from "./utils";
 
 // 缓存
-const WEATHER_DATA_STORAGE_KEY = 'weather-data' as const;
+const WEATHER_DATA_STORAGE_KEY = 'lhl:weather' as const;
 
 // 样式
 const maxTemperatureEl = ref<HTMLElement | null>(null);
