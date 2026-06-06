@@ -55,11 +55,12 @@
 
 <script setup lang="ts">
 import Teek, { clockIcon } from "vitepress-theme-teek";
-import { useData } from "vitepress";
-import { nextTick, watch } from "vue";
+import { useRouter, useData } from "vitepress";
+import { nextTick, onMounted, watch } from "vue";
 import { useRibbon } from "../composables/useRibbon";
 import { useRuntime } from "../composables/useRuntime";
 import { useDocBgImage } from "../composables/useDocBgImage.ts";
+import { useRefreshDetection } from "@/composables/useRefreshDetection.ts";
 import {
   LhlArchivesTopBefore,
   LhlArticleBannerInfoBottom,
@@ -72,6 +73,7 @@ import {
   LhlNotFound,
 } from "./slots";
 
+const router = useRouter();
 const { theme, frontmatter } = useData();
 
 // 彩带背景
@@ -109,6 +111,11 @@ const watchDocBgImage = async (layout: string) => {
   switchDocBgImage(isDoc && showAside && frontmatter.value.coverImg ? frontmatter.value.coverImg : '');
 };
 watch(frontmatter, newVal => setTimeout(() => watchDocBgImage(newVal.layout), 0), { immediate: true, flush: "post", });
+
+// 刷新探测
+const { checkDeployment } = useRefreshDetection();
+onMounted(checkDeployment); // 首次加载时检查
+router.onAfterRouteChange = checkDeployment; // 路由切换时检查
 </script>
 
 <style scoped lang="scss">
