@@ -1,5 +1,4 @@
 <template>
-  <!-- style 用于修复预报卡片在播放自动切换动画时会超出卡片范围显示的问题 -->
   <TkPageCard
     :page="true"
     v-model="pageNum"
@@ -9,7 +8,6 @@
     :title-click="fetchWeather"
     :autoPage="tagConfig.autoPage"
     :pageSpeed="tagConfig.pageSpeed"
-    style="position: relative;overflow: hidden;"
   >
     <template #default="{ transitionName }">
       <div v-if="!isLoading && !isError">
@@ -44,7 +42,7 @@
         <!-- 分隔线 -->
         <div style="margin: 10px calc(var(--tk-home-card-padding) * -1);height: 1px;background-color: var(--vp-c-divider);"></div>
         <!-- 预报 -->
-        <TransitionGroup v-if="!isLoading && !isError" :name="transitionName" tag="div" mode="out-in">
+        <TransitionGroup v-if="!isLoading && !isError" :name="transitionName" tag="div" mode="out-in" style="position: relative;">
           <div v-for="forecast in currentForecast" :key="forecast.time">
             <div style="display: flex;justify-content: space-between;margin-bottom: 10px;padding: 0 5px;">
               <div :id="`forecast-day-${forecast.time}`" :style="{ minWidth: forecastMaxWidth + 'px' }" style="text-align: left;">{{ formatDay(forecast.time) }}</div>
@@ -311,10 +309,10 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-// 天气预报旧卡片离开时，元素会先脱离文档流，变为绝对定位，再播放动画
+// 天气预报旧卡片离开时，旧元素会先脱离文档流，变为绝对定位，再播放动画
 .tk-slide-prev-leave-active,
 .tk-slide-next-leave-active {
-  width: calc(100% - 2 * var(--tk-home-card-padding)) !important;
-  box-sizing: border-box !important;
+  // 设置预报卡片的宽度为 relative 指定元素宽度的 100%，用于修复淡出时，宽度变为由内容宽度决定
+  width: 100% !important;
 }
 </style>
