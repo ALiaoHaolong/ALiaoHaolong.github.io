@@ -24,3 +24,29 @@ export interface ContributeHeatmapChartOptions {
    */
   calendarRange: (screenWidth: number) => string[],
 }
+
+export interface CommitRecordData {
+  /**
+   * 请求时间戳
+   */
+  timestamp: number;
+  /**
+   * 提交记录数据
+   */
+  data: CommitRecordItem[];
+}
+
+export interface CommitRecordItem {
+  /**
+   * 每天的提交数量，从周日到周六：[周日, 周一, 周二, 周三, 周四, 周五, 周六]
+   */
+  days: number[];
+  /**
+   * 该周的总提交数
+   */
+  total: number;
+  /**
+   * 该周的起始时间戳（周日 00:00:00 UTC）
+   */
+  week: number;
+}

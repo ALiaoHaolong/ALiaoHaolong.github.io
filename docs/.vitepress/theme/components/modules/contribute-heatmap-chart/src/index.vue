@@ -7,20 +7,23 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, computed, useTemplateRef, onMounted, onUnmounted } from "vue";
 import { useData } from "vitepress";
-import { usePosts, useIntersectionObserver } from "vitepress-theme-teek";
+import { usePosts, useIntersectionObserver, formatDate } from "vitepress-theme-teek";
 import * as echarts from "echarts/core"; // 引入 ECharts
 import { CanvasRenderer } from 'echarts/renderers'; // 引入 Canvas 渲染器
 import { HeatmapChart } from "echarts/charts"; // 热力图
 import { TooltipComponent, CalendarComponent, VisualMapComponent } from 'echarts/components'; // 组件
-import type { ContributeHeatmapChartOptions } from "./types";
+import type { ContributeHeatmapChartOptions, CommitRecordData, CommitRecordItem } from "./types";
+
+// 缓存
+const COMMIT_RECORD_DATA_STORAGE_KEY = 'lhl:commitRecord' as const;
 
 // 注册 ECharts 组件
 echarts.use([
+  CanvasRenderer,
+  HeatmapChart,
   TooltipComponent,
   CalendarComponent,
   VisualMapComponent,
-  HeatmapChart,
-  CanvasRenderer,
 ]);
 
 // 接收参数
@@ -35,26 +38,108 @@ const props = withDefaults(defineProps<ContributeHeatmapChartOptions>(), {
 const { isDark } = useData();
 // 获取全部文章数据
 const posts = usePosts();
+// 转换后的文章统计数据 { "2026-05-01": 2, "2026-05-02": 1, "2026-05-03": 5 }
+const transformedPosts: any = {};
+// 获取仓库 commit 数据
+const commitRecordData = ref<CommitRecordData>({
+  timestamp: 0,
+  data: [],
+});
+// 转换后的 commit 统计数据 { "2026-05-01": 2, "2026-05-02": 1, "2026-05-03": 5 }
+const transformedCommitRecord: any = {};
+
+// 使用 UTC 日期比较，避免时区问题
+const isToday = (timestamp: number) => {
+  const a = new Date();
+  const b = new Date(timestamp);
+  return b.getUTCFullYear() === a.getUTCFullYear() && b.getUTCMonth() === a.getUTCMonth() && b.getUTCDate() === a.getUTCDate();
+};
+
+const isFetching = ref(false); // 请求锁
+const fetchCommitRecord = async () => {
+  // 过滤重复请求
+  if (isFetching.value === true) return;
+  // 加锁
+  isFetching.value = true;
+
+  // 检查缓存
+  const cached = localStorage.getItem(COMMIT_RECORD_DATA_STORAGE_KEY); // 获取缓存
+  if (cached) { // 如果缓存存在
+    // 获取保存的数据
+    const data: CommitRecordData = JSON.parse(cached);
+    // 如果上次请求时间是今天
+    if (isToday(data.timestamp)) {
+      // 使用缓存数据
+      commitRecordData.value = data;
+      // 释放锁
+      isFetching.value = false;
+      return;
+    }
+  }
+
+  // 缓存不存在或已过期，请求数据
+  try {
+    const url = `https://api.github.com/repos/ALiaoHaolong/ALiaoHaolong.github.io/stats/commit_activity`;
+    const response = await fetch(url);
+    const result: CommitRecordItem[] = await response.json();
+
+    // 更新数据并存入缓存
+    commitRecordData.value = { timestamp: Date.now(), data: result };
+    localStorage.setItem(COMMIT_RECORD_DATA_STORAGE_KEY, JSON.stringify(commitRecordData.value));
+  } catch (err) {
+    console.error(err);
+  } finally {
+    // 释放锁
+    isFetching.value = false;
+  }
+};
 
 // 贡献图数据
 const contributeList = computed(() => {
-  // 数据初始化 { "2026-05-01": 2, "2026-05-02": 1, "2026-05-03": 5 }
-  const contributeObject: any = ref({});
-  // 计数
+  // 文档计数
   posts.value.sortPostsByDate.forEach(item => { // sortPostsByDate 根据日期排序的文章列表
-    // 获取文章 date 属性
+    // 获取文章 date 属性 yyyy-MM-dd HH:mm:ss
     if (!item.date) return;
     // 获取日期 yyyy-MM-dd
     const date = item.date.substring(0, 10);
     // 计数
-    if (contributeObject.value[date]) // 获取 contributeObject.value.${date} 的值（语法错误，如此理解即可）
-      contributeObject.value[date]++; // 如果存在，计数值 ++
+    if (transformedPosts[date]) // 获取 transformedPosts.${date} 的值（语法错误，如此理解即可）
+      transformedPosts[date]++; // 如果存在，计数值 ++
     else
-      contributeObject.value[date] = 1; // 如果不存在，赋初值 1
+      transformedPosts[date] = 1; // 如果不存在，赋初值 1
+  });
+  // 提交计数
+  commitRecordData.value.data.forEach(item => { // commitRecordData.value.data 提交记录数据
+    // 本周无提交 跳过
+    if (item.total == 0) return;
+    // 遍历 item.days
+    for (let i = 0; i < item.days.length; i++) { // 遍历 item.days
+      // 本日无提交 跳过
+      if (item.days[i] == 0) continue;
+      // 获取日期
+      const date = formatDate(item.week * 1000 + i * 24 * 60 * 60 * 1000, "yyyy-MM-dd");
+      // 计数
+      if (!transformedCommitRecord[date]) // 获取 transformedCommitRecord.${date} 的值（语法错误，如此理解即可）
+        transformedCommitRecord[date] = 0; // 如果不存在，赋初值 0
+      transformedCommitRecord[date] += item.days[i]; // 计数值叠加
+    }
+  });
+  // 合并数据
+  const mergedData: any = {};
+  Object.keys(transformedPosts).forEach(date => {
+    mergedData[date] = transformedPosts[date];
+  });
+  Object.keys(transformedCommitRecord).forEach(date => {
+    if (mergedData[date]) {
+      mergedData[date] += transformedCommitRecord[date];
+    } else {
+      mergedData[date] = transformedCommitRecord[date];
+    }
   });
   // 转换格式
-  return Object.keys(contributeObject.value) // [ "2026-05-01", "2026-05-02", "2026-05-03" ]
-    .map((item: string) => [item, contributeObject.value[item]]); // [[ "2026-05-01", 2 ], [ "2026-05-02", 1 ], [ "2026-05-03", 5 ]]
+  return Object.keys(mergedData) // [ "2026-05-01", "2026-05-02", "2026-05-03" ]
+    .sort((a, b) => new Date(a).getTime() - new Date(b).getTime()) // 排序
+    .map((item: string) => [item, mergedData[item]]); // [[ "2026-05-01", 2 ], [ "2026-05-02", 1 ], [ "2026-05-03", 5 ]]
 });
 
 // 贡献图容器
@@ -94,7 +179,9 @@ const calendarRange = computed((): string[] => {
 const option = {
   tooltip: {
     formatter: function (params: any) {
-      return `${params.value[0]} <br/> ${params.value[1]} 篇文章`;
+      return `${params.value[0]}` +
+      (transformedPosts[params.value[0]] ? ` <br/>📝 ${transformedPosts[params.value[0]]} 篇文章` : '') +
+      (transformedCommitRecord[params.value[0]] ? ` <br/>💻 ${transformedCommitRecord[params.value[0]]} 次提交` : '');
     },
     backgroundColor: "#fff", // 同文档背景色
     padding: [6, 10],
@@ -105,9 +192,9 @@ const option = {
   visualMap: {
     show: false,
     min: 0,
-    max: 5,
+    max: 10,
     inRange: {
-      color: ["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127", "#196127"],
+      color: ["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127", "#196127"]
     },
   },
   calendar: {
@@ -195,6 +282,8 @@ onMounted(() => {
   screenWidth.value = window.innerWidth;
   // 监听屏幕宽度
   window.addEventListener('resize', handleResize);
+  // 请求 Commit 数据
+  fetchCommitRecord();
 });
 
 onUnmounted(() => {
