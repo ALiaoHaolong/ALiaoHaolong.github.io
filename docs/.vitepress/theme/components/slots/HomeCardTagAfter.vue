@@ -26,9 +26,9 @@ const calendarRange = (screenWidth: number): string[] => {
   const today = formatDate(date, 'yyyy-MM-dd', false);
   // 根据屏幕宽度动态计算起始日期
   if (screenWidth >= screenWidthThreshold) // 屏幕宽度大于等于阈值时，组件宽度固定，使用静态值
-    date.setTime(date.getTime() - (8 * 7 + date.getDay()) * oneDay); // 基础 6 列 + 当前星期数动态一列
+    date.setTime(date.getTime() - (8 * 7 + date.getDay()) * oneDay); // 基础 8 列 + 当前星期数动态一列
   if (screenWidth < screenWidthThreshold) // 屏幕宽度小于阈值时，组件宽度随屏幕宽度变化，屏幕每宽一个 cell 的宽度，就增加一列
-    date.setTime(date.getTime() - (Math.ceil(screenWidth / 20) - 8) * 7 * oneDay); // 基础 36 列 + 当前星期数动态一列
+    date.setTime(date.getTime() - ((Math.ceil(screenWidth / 20) - 8) * 7 + date.getDay()) * oneDay);
   // 返回日期范围
   return [formatDate(date, 'yyyy-MM-dd', false), today];
 };
