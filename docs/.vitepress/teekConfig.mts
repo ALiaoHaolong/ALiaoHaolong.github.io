@@ -218,10 +218,10 @@ export const teekConfig = defineTeekConfig({
     // title: "${icon}精选文章", // 卡片标题
     emptyLabel: "暂无精选文章", // 精选文章为空时的标签
     limit: 5, // 一页显示的数量
-    autoPage: true, // 是否自动翻页
-    pageSpeed: 5000, // 翻页间隔时间，单位：毫秒。autoPage 为 true 时生效
+    autoPage: false, // 是否自动翻页
+    // pageSpeed: 5000, // 翻页间隔时间，单位：毫秒。autoPage 为 true 时生效
     dateFormat: "yyyy-MM-dd hh:mm:ss", // 精选文章的日期格式
-    titleClick: () => {}, // 点击标题时触发，可以通过 router.go 跳转到其他页面，也可以通过 window.open 打开新窗口
+    // titleClick: () => {}, // 点击标题时触发，可以通过 router.go 跳转到其他页面，也可以通过 window.open 打开新窗口
   },
   // 分类卡片配置
   category: {
