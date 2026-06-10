@@ -65,9 +65,9 @@
         </TransitionGroup>
       </div>
 
-      <div v-else-if="isError">天气更新失败，<a class="hover-color" @click="fetchWeather()">点此重试</a></div>
+      <div v-else-if="isError" style="padding: 0 5px;">天气更新失败，<a class="hover-color" @click="fetchWeather()">点此重试</a></div>
 
-      <div ref="isLoadingEl" v-else-if="isLoading"></div>
+      <div ref="isLoadingEl" v-else-if="isLoading" style="padding: 0 5px;"></div>
     </template>
   </TkPageCard>
 </template>
