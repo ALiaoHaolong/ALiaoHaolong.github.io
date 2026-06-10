@@ -75,10 +75,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, watch, nextTick, onUnmounted } from 'vue';
 import { TkPageCard } from 'vitepress-theme-teek';
-import { getWeatherInfo } from "@/config";
 import { weather } from "@/icons";
 import { WeatherData } from "./types";
-import { formatDay, formatDate, windDirectionToText, windSpeedToLevel } from "./utils";
+import { formatDay, formatDate, windDirectionToText, windSpeedToLevel, getWeatherInfo } from "./utils";
 
 // 缓存
 const WEATHER_DATA_STORAGE_KEY = 'lhl:weather' as const;
