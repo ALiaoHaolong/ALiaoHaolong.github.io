@@ -22,7 +22,7 @@ const calendarRange = (screenWidth: number): string[] => {
   const today = formatDate(date, 'yyyy-MM-dd', false);
   // 根据屏幕宽度动态计算起始日期
   if (screenWidth < screenWidthThresholdMax) { // 屏幕宽度小于最大阈值时，文章页宽度等于屏幕宽度
-    date.setTime(date.getTime() - (6 * 7 + date.getDay()) * oneDay); // 基础 6 列 + 当前星期数动态一列
+    date.setTime(date.getTime() - (7 * 7 + date.getDay()) * oneDay); // 基础 7 列 + 当前星期数动态一列
     if (screenWidth > screenWidthThresholdMin) // 大于起始计算阈值后，屏幕每宽一个 cell 的宽度，就增加一列
       date.setTime(date.getTime() - Math.ceil((screenWidth - screenWidthThresholdMin) / 20) * 7 * oneDay);
   }
